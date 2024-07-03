@@ -3,53 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Under Maintenance</title>
+    <title>My Personal Profile</title>
     <style>
         body {
-            background: #0f0f0f;
-            color: #e0e0e0;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #1d1f21;
+            color: #c5c8c6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
-        .container {
+        header {
+            background-color: #282a36;
+            padding: 20px;
             text-align: center;
-            border: 2px solid #29a19c;
-            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        header h1 {
+            margin: 0;
+            color: #50fa7b;
+        }
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            z-index: 2;
+            position: relative;
+        }
+        .content h2 {
+            border-bottom: 2px solid #ff79c6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #bd93f9;
+        }
+        .card {
+            background-color: #44475a;
             border-radius: 10px;
-            box-shadow: 0 0 20px #29a19c;
-            animation: glow 1.5s infinite alternate;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        h1 {
-            font-size: 2.5em;
-            color: #29a19c;
+        .card h3 {
+            margin-top: 0;
+            color: #ff79c6;
         }
-        p {
-            font-size: 1.2em;
-            margin: 20px 0;
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #282a36;
+            color: #6272a4;
+            position: relative;
+            z-index: 2;
         }
-        .icon {
-            width: 100px;
-            margin: 20px auto;
+        .link {
+            color: #8be9fd;
+            text-decoration: none;
         }
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 20px #29a19c;
+        .link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .content {
+                padding: 10px;
             }
-            to {
-                box-shadow: 0 0 40px #29a19c, 0 0 60px #29a19c;
+            .card {
+                padding: 15px;
             }
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://example.com/blockchain-icon.svg" alt="Maintenance Icon" class="icon">
-        <h1>We'll Be Back Soon</h1>
-        <p>Our website is currently undergoing scheduled maintenance. We apologize for any inconvenience and appreciate your patience. Please check back later.</p>
+    <div id="particles-js"></div>
+    <header>
+        <h1>Welcome to My Code World</h1>
+    </header>
+    <div class="content">
+        <div class="card">
+            <h3>About Me</h3>
+            <p>Hi, I'm a tech enthusiast passionate about Artificial Intelligence and Blockchain technologies. I love exploring new trends and innovations in these fields.</p>
+        </div>
+        <div class="card">
+            <h3>Projects</h3>
+            <p>Check out some of my cool projects on <a href="https://github.com/al-user12" class="link">GitHub</a>:</p>
+            <ul>
+                <li>AI Whatsapp Bot</li>
+                <li>Blockchain Medical Management System</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Contact</h3>
+            <p>Feel free to <a href="mailto:your.alfikridev@gmail.com" class="link">email me</a> or connect with me on <a href="https://linkedin.com/in/yourusername" class="link">LinkedIn</a>.</p>
+        </div>
     </div>
+    <div class="footer">
+        &copy; 2024 Al-User12 Profile Build with 🩷
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: ["#ff79c6", "#8be9fd", "#bd93f9"]
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#ffffff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
 </body>
 </html>
