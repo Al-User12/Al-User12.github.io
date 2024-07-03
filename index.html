@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Profile</title>
+    <title>My AI and Blockchain Profile</title>
     <style>
         body {
             background-color: #1d1f21;
             color: #c5c8c6;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
@@ -22,19 +22,14 @@
         header h1 {
             margin: 0;
             color: #50fa7b;
+            font-weight: 300;
         }
         .content {
-            padding: 20px;
+            padding: 40px 20px;
             max-width: 800px;
             margin: auto;
             z-index: 2;
             position: relative;
-        }
-        .content h2 {
-            border-bottom: 2px solid #ff79c6;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            color: #bd93f9;
         }
         .card {
             background-color: #44475a;
@@ -42,10 +37,20 @@
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
         .card h3 {
             margin-top: 0;
             color: #ff79c6;
+            font-weight: 400;
+        }
+        .card p {
+            margin: 10px 0;
+            line-height: 1.6;
         }
         .footer {
             text-align: center;
@@ -58,13 +63,14 @@
         .link {
             color: #8be9fd;
             text-decoration: none;
+            transition: color 0.3s;
         }
         .link:hover {
-            text-decoration: underline;
+            color: #50fa7b;
         }
         @media (max-width: 768px) {
             .content {
-                padding: 10px;
+                padding: 20px 10px;
             }
             .card {
                 padding: 15px;
@@ -83,7 +89,7 @@
 <body>
     <div id="particles-js"></div>
     <header>
-        <h1>Welcome to My Code World</h1>
+        <h1>Welcome to Al-User12 Code World ✨</h1>
     </header>
     <div class="content">
         <div class="card">
@@ -94,24 +100,24 @@
             <h3>Projects</h3>
             <p>Check out some of my cool projects on <a href="https://github.com/al-user12" class="link">GitHub</a>:</p>
             <ul>
-                <li>AI Whatsapp Bot</li>
-                <li>Blockchain Medical Management System</li>
+                <li>AI powered bot 🤖</li>
+                <li>Blockchain integrated System 💹</li>
             </ul>
         </div>
         <div class="card">
             <h3>Contact</h3>
-            <p>Feel free to <a href="mailto:your.alfikridev@gmail.com" class="link">email me</a> or connect with me on <a href="https://linkedin.com/in/yourusername" class="link">LinkedIn</a>.</p>
+            <p>Feel free to <a href="mailto:alfikridev@gmail.com" class="link">email me</a> or connect with me on <a href="https://linkedin.com/in/alfikrikm" class="link">LinkedIn</a>.</p>
         </div>
     </div>
     <div class="footer">
-        &copy; 2024 Al-User12 Profile Build with 🩷
+        &copy; 2024 Al-User12 Profile Build With 🩷
     </div>
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <script>
         particlesJS('particles-js', {
             particles: {
                 number: {
-                    value: 80,
+                    value: 50,
                     density: {
                         enable: true,
                         value_area: 800
@@ -132,7 +138,7 @@
                 },
                 opacity: {
                     value: 0.5,
-                    random: false,
+                    random: true,
                     anim: {
                         enable: false,
                         speed: 1,
@@ -159,9 +165,9 @@
                 },
                 move: {
                     enable: true,
-                    speed: 6,
+                    speed: 2,
                     direction: "none",
-                    random: false,
+                    random: true,
                     straight: false,
                     out_mode: "out",
                     bounce: false,
