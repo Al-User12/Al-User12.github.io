@@ -5,36 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al Fikri Kholil Misbah Nur</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans">
     <header class="bg-gray-800 shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-10">
         <h1 class="text-2xl font-bold">Al Fikri Kholil Misbah Nur</h1>
     </header>
     <main class="container mx-auto px-4 py-12">
-        <section class="bg-gray-800 shadow-lg rounded-lg p-8 mb-6 text-center transition-transform transform hover:scale-105">
-            <h3 class="text-xl font-semibold">About Me</h3>
-            <p class="text-gray-300 mt-2">Experienced backend developer with expertise in Node.js, TypeScript, and Laravel. Passionate about AI, Blockchain, and system security.</p>
+        <section class="bg-gray-800 shadow-lg rounded-2xl p-8 mb-6 text-center transform transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-2xl">
+            <h3 class="text-2xl font-bold">About Me</h3>
+            <p class="text-gray-300 mt-3">Experienced backend developer with expertise in Node.js, TypeScript, and Laravel. Passionate about AI, Blockchain, and system security.</p>
         </section>
-        <section class="bg-gray-800 shadow-lg rounded-lg p-8 mb-6 transition-transform transform hover:scale-105">
-            <h3 class="text-xl font-semibold">Projects</h3>
-            <ul class="list-disc list-inside text-gray-300 text-left pl-6 mt-2">
+        <section class="bg-gray-800 shadow-lg rounded-2xl p-8 mb-6 transform transition-all duration-300 hover:scale-105 hover:-rotate-1 hover:shadow-2xl">
+            <h3 class="text-2xl font-bold">Projects</h3>
+            <ul class="list-disc list-inside text-gray-300 text-left pl-6 mt-3">
                 <li>AI Voice Generation SaaS</li>
                 <li>Blockchain-integrated ERP System</li>
                 <li>Multi-Tenant POS Application</li>
             </ul>
-            <a href="https://github.com/al-user12" class="text-blue-400 hover:underline block mt-4">View on GitHub</a>
+            <a href="https://github.com/al-user12" class="inline-block mt-5 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-semibold shadow-lg transition-all duration-300 hover:from-indigo-600 hover:to-purple-500 hover:scale-110">View on GitHub</a>
         </section>
-        <section class="bg-gray-800 shadow-lg rounded-lg p-8 text-center transition-transform transform hover:scale-105">
-            <h3 class="text-xl font-semibold">Contact</h3>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="mailto:alfikridev@gmail.com" class="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Email</a>
-                <a href="https://linkedin.com/in/alfikrikm" class="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">LinkedIn</a>
-                <a href="https://github.com/al-user12" class="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">GitHub</a>
+        <section class="bg-gray-800 shadow-lg rounded-2xl p-8 text-center transform transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-2xl">
+            <h3 class="text-2xl font-bold">Contact</h3>
+            <div class="flex justify-center space-x-4 mt-5">
+                <a href="mailto:alfikridev@gmail.com" class="px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-lg font-semibold shadow-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-110">Email</a>
+                <a href="https://linkedin.com/in/alfikrikm" class="px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-lg font-semibold shadow-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-110">LinkedIn</a>
+                <a href="https://github.com/al-user12" class="px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-lg font-semibold shadow-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-110">GitHub</a>
             </div>
         </section>
     </main>
     <footer class="text-center py-4 text-sm bg-gray-800 text-gray-400">
         &copy; 2024 Al Fikri Kholil Misbah Nur | Built with ❤️
     </footer>
+    <script>
+        gsap.from("header", { opacity: 0, y: -50, duration: 1 });
+        gsap.from("section", { opacity: 0, scale: 0.9, duration: 1, stagger: 0.3 });
+    </script>
 </body>
 </html>
