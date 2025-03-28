@@ -4,104 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al Fikri Kholil Misbah Nur</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #1e1e2e, #11111b);
-            color: #cdd6f4;
-            text-align: center;
-            overflow-x: hidden;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
         }
-        header {
-            background: rgba(17, 17, 27, 0.9);
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .card {
-            background: rgba(49, 50, 68, 0.8);
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 12px;
-            max-width: 600px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        }
-        .link, .contact-links a {
-            color: #89b4fa;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-        .link:hover, .contact-links a:hover {
-            color: #f38ba8;
-        }
-        footer {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(17, 17, 27, 0.9);
-            color: #a6adc8;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-        }
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-        .contact-links a {
-            padding: 8px 14px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            transition: background 0.3s ease;
-        }
-        .contact-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <header>
-        <h1>Al Fikri Kholil Misbah Nur</h1>
-        <p>Backend Developer | AI & Blockchain Enthusiast</p>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans">
+    <header class="bg-white dark:bg-gray-800 shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-10">
+        <h1 class="text-xl font-bold">Al Fikri Kholil Misbah Nur</h1>
+        <button onclick="toggleTheme()" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+            🌙 / ☀️
+        </button>
     </header>
-    <main>
-        <section class="card">
-            <h3>About Me</h3>
+    <main class="container mx-auto px-4 py-8">
+        <section class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-semibold">About Me</h3>
             <p>Experienced backend developer with expertise in Node.js, TypeScript, and Laravel. Passionate about AI, Blockchain, and system security.</p>
         </section>
-        <section class="card">
-            <h3>Projects</h3>
-            <ul>
+        <section class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-semibold">Projects</h3>
+            <ul class="list-disc list-inside">
                 <li>AI Voice Generation SaaS</li>
                 <li>Blockchain-integrated ERP System</li>
                 <li>Multi-Tenant POS Application</li>
             </ul>
-            <a href="https://github.com/al-user12" class="link">View on GitHub</a>
+            <a href="https://github.com/al-user12" class="text-blue-500 hover:underline">View on GitHub</a>
         </section>
-        <section class="card">
-            <h3>Contact</h3>
-            <div class="contact-links">
-                <a href="mailto:alfikridev@gmail.com">Email</a>
-                <a href="https://linkedin.com/in/alfikrikm">LinkedIn</a>
-                <a href="https://github.com/al-user12">GitHub</a>
+        <section class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+            <h3 class="text-lg font-semibold">Contact</h3>
+            <div class="flex space-x-4 mt-2">
+                <a href="mailto:alfikridev@gmail.com" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">Email</a>
+                <a href="https://linkedin.com/in/alfikrikm" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">LinkedIn</a>
+                <a href="https://github.com/al-user12" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">GitHub</a>
             </div>
         </section>
     </main>
-    <footer>
+    <footer class="text-center py-4 text-sm bg-gray-200 dark:bg-gray-800">
         &copy; 2024 Al Fikri Kholil Misbah Nur | Built with ❤️
     </footer>
 </body>
