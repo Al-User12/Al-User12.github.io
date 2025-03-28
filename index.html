@@ -5,54 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al Fikri Kholil Misbah Nur</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        function toggleTheme() {
-            if (localStorage.getItem('theme') === 'dark') {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('theme') === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
-        });
-    </script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans">
-    <header class="bg-white dark:bg-gray-800 shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-10">
-        <h1 class="text-xl font-bold">Al Fikri Kholil Misbah Nur</h1>
-        <button onclick="toggleTheme()" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition duration-300">
-            <span id="theme-icon" class="text-lg">🌙</span>
-        </button>
+<body class="bg-gray-900 text-white font-sans">
+    <header class="bg-gray-800 shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-10">
+        <h1 class="text-2xl font-bold">Al Fikri Kholil Misbah Nur</h1>
     </header>
     <main class="container mx-auto px-4 py-12">
-        <section class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-6 text-center transition-transform transform hover:scale-105">
-            <h3 class="text-lg font-semibold">About Me</h3>
-            <p>Experienced backend developer with expertise in Node.js, TypeScript, and Laravel. Passionate about AI, Blockchain, and system security.</p>
+        <section class="bg-gray-800 shadow-lg rounded-lg p-8 mb-6 text-center transition-transform transform hover:scale-105">
+            <h3 class="text-xl font-semibold">About Me</h3>
+            <p class="text-gray-300 mt-2">Experienced backend developer with expertise in Node.js, TypeScript, and Laravel. Passionate about AI, Blockchain, and system security.</p>
         </section>
-        <section class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-6 transition-transform transform hover:scale-105">
-            <h3 class="text-lg font-semibold">Projects</h3>
-            <ul class="list-disc list-inside text-left pl-4">
+        <section class="bg-gray-800 shadow-lg rounded-lg p-8 mb-6 transition-transform transform hover:scale-105">
+            <h3 class="text-xl font-semibold">Projects</h3>
+            <ul class="list-disc list-inside text-gray-300 text-left pl-6 mt-2">
                 <li>AI Voice Generation SaaS</li>
                 <li>Blockchain-integrated ERP System</li>
                 <li>Multi-Tenant POS Application</li>
             </ul>
-            <a href="https://github.com/al-user12" class="text-blue-500 hover:underline block mt-3">View on GitHub</a>
+            <a href="https://github.com/al-user12" class="text-blue-400 hover:underline block mt-4">View on GitHub</a>
         </section>
-        <section class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105">
-            <h3 class="text-lg font-semibold">Contact</h3>
+        <section class="bg-gray-800 shadow-lg rounded-lg p-8 text-center transition-transform transform hover:scale-105">
+            <h3 class="text-xl font-semibold">Contact</h3>
             <div class="flex justify-center space-x-4 mt-4">
-                <a href="mailto:alfikridev@gmail.com" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">Email</a>
-                <a href="https://linkedin.com/in/alfikrikm" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">LinkedIn</a>
-                <a href="https://github.com/al-user12" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">GitHub</a>
+                <a href="mailto:alfikridev@gmail.com" class="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Email</a>
+                <a href="https://linkedin.com/in/alfikrikm" class="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">LinkedIn</a>
+                <a href="https://github.com/al-user12" class="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">GitHub</a>
             </div>
         </section>
     </main>
-    <footer class="text-center py-4 text-sm bg-gray-200 dark:bg-gray-800">
+    <footer class="text-center py-4 text-sm bg-gray-800 text-gray-400">
         &copy; 2024 Al Fikri Kholil Misbah Nur | Built with ❤️
     </footer>
 </body>
