@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <style>
         body {
-            background: #1d1f21;
-            color: #c5c8c6;
+            background: #ffffff;
+            color: #1d1f21;
             font-family: 'Roboto', sans-serif;
         }
         #particles-js {
@@ -19,13 +19,22 @@
             z-index: -1;
         }
         .card {
-            background: #44475a;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #1e3a8a, #9333ea);
+            border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            color: white;
+        }
+        .card:hover {
+            transform: translateY(-5px);
         }
         .btn {
             background: linear-gradient(90deg, #6366F1, #9333EA);
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -33,6 +42,7 @@
     <div id="particles-js"></div>
     <header class="bg-indigo-600 text-white py-4 px-6 text-center">
         <h1 class="text-3xl font-bold">Al Fikri Kholil Misbah Nur ✨</h1>
+        <p class="text-sm">🟢 Online</p>
     </header>
     <main class="container mx-auto px-4 py-12">
         <section class="card text-center">
@@ -46,6 +56,7 @@
                 <li>Blockchain-integrated ERP System</li>
                 <li>Multi-Tenant POS Application</li>
             </ul>
+            <a href="https://github.com/al-user12" class="btn px-6 py-3 text-white rounded-lg mt-4 inline-block">Check on GitHub</a>
         </section>
         <section class="card text-center">
             <h3 class="text-2xl font-bold">Contact 📬</h3>
@@ -60,12 +71,24 @@
         particlesJS("particles-js", {
             particles: {
                 number: { value: 100 },
-                color: { value: ["#ff79c6", "#8be9fd", "#bd93f9"] },
+                color: { value: "#ffffff" },
                 shape: { type: "circle" },
                 opacity: { value: 0.8 },
-                size: { value: 4 },
-                move: { speed: 1, direction: "bottom", straight: true }
-            }
+                size: { value: 3 },
+                move: { speed: 1, direction: "bottom", straight: false },
+                line_linked: { enable: false }
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                },
+                modes: {
+                    repulse: { distance: 100 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
         });
     </script>
 </body>
