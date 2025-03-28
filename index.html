@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <style>
         body {
-            background: #1d1f21;
-            color: #c5c8c6;
+            background: #ffffff;
+            color: #1d1f21;
             font-family: 'Roboto', sans-serif;
         }
         #particles-js {
@@ -21,9 +21,11 @@
         .card {
             background: linear-gradient(135deg, #1e3a8a, #9333ea);
             border-radius: 12px;
-            padding: 20px;
+            padding: 32px;
+            margin: 16px 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease-in-out;
+            color: white;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -31,6 +33,8 @@
         .btn {
             background: linear-gradient(90deg, #6366F1, #9333EA);
             transition: transform 0.2s;
+            padding: 12px 24px;
+            margin: 8px;
         }
         .btn:hover {
             transform: scale(1.05);
@@ -39,31 +43,33 @@
 </head>
 <body>
     <div id="particles-js"></div>
-    <header class="bg-indigo-600 text-white py-4 px-6 text-center">
+    <header class="bg-indigo-600 text-white py-6 px-8 text-center">
         <h1 class="text-3xl font-bold">Al Fikri Kholil Misbah Nur ✨</h1>
-        <p class="text-sm">🟢 Online</p>
+        <p class="text-sm mt-2">🟢 Online</p>
     </header>
-    <main class="container mx-auto px-4 py-12">
-        <section class="card text-center text-white">
-            <h3 class="text-2xl font-bold">About Me ⚡</h3>
+    <main class="container mx-auto px-6 py-16">
+        <section class="card text-center">
+            <h3 class="text-2xl font-bold mb-4">About Me ⚡</h3>
             <p>Experienced backend developer with expertise in Node.js, TypeScript, and Laravel.</p>
         </section>
-        <section class="card text-center text-white">
-            <h3 class="text-2xl font-bold">Projects 🚀</h3>
-            <ul class="list-disc list-inside pl-6">
+        <section class="card text-center">
+            <h3 class="text-2xl font-bold mb-4">Projects 🚀</h3>
+            <ul class="list-disc list-inside pl-6 space-y-2">
                 <li>AI Voice Generation SaaS</li>
                 <li>Blockchain-integrated ERP System</li>
                 <li>Multi-Tenant POS Application</li>
             </ul>
-            <a href="https://github.com/al-user12" class="btn px-6 py-3 text-white rounded-lg mt-4 inline-block">Check on GitHub</a>
+            <a href="https://github.com/al-user12" class="btn text-white rounded-lg mt-6 inline-block">Check on GitHub</a>
         </section>
-        <section class="card text-center text-white">
-            <h3 class="text-2xl font-bold">Contact 📬</h3>
-            <a href="mailto:alfikridev@gmail.com" class="btn px-6 py-3 text-white rounded-lg">Email</a>
-            <a href="https://linkedin.com/in/alfikrikm" class="btn px-6 py-3 text-white rounded-lg">LinkedIn</a>
+        <section class="card text-center">
+            <h3 class="text-2xl font-bold mb-4">Contact 📬</h3>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="mailto:alfikridev@gmail.com" class="btn text-white rounded-lg">Email</a>
+                <a href="https://linkedin.com/in/alfikrikm" class="btn text-white rounded-lg">LinkedIn</a>
+            </div>
         </section>
     </main>
-    <footer class="text-center py-4 bg-indigo-600 text-white">
+    <footer class="text-center py-6 bg-indigo-600 text-white">
         &copy; 2024 Al Fikri Kholil Misbah Nur | Built with ❤️
     </footer>
     <script>
