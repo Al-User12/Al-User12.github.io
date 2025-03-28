@@ -82,7 +82,7 @@
         }
         typeEffect();
         
-        // Particles.js Alternative
+        // Particles.js Configuration
         tsParticles.load("particles-js", {
             particles: {
                 number: { value: 150 },
@@ -90,7 +90,14 @@
                 shape: { type: "circle" },
                 opacity: { value: 0.8 },
                 size: { value: 5 },
-                move: { speed: 2.5 }
+                move: {
+                    enable: true,
+                    speed: 2.5,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    outModes: "out"
+                }
             },
             interactivity: {
                 events: {
