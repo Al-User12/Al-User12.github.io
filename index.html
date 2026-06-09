@@ -3,12 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="alfikri-labs is the secondary portfolio of Al Fikri Kholil Misbah, focused on AI systems, backend architecture, automation, and experimental product builds." />
+  <meta name="description" content="alfikri-labs is the secondary portfolio of Al Fikri Kholil Misbah, focused on systems, orchestration, automation, interfaces, and experimental product builds." />
   <meta name="theme-color" content="#07070a" />
-  <meta property="og:title" content="alfikri-labs - Experiments by Al Fikri" />
-  <meta property="og:description" content="Secondary portfolio for AI systems, backend architecture, automation, and product experiments by Al Fikri Kholil Misbah." />
+  <meta property="og:title" content="alfikri-labs - Systems in motion" />
+  <meta property="og:description" content="Secondary portfolio for systems thinking, orchestration, automation, interfaces, and product experiments by Al Fikri Kholil Misbah." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://al-user12.github.io" />
+  <meta property="og:image" content="https://al-user12.github.io/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="alfikri-labs - Systems in motion" />
+  <meta name="twitter:description" content="Secondary portfolio for systems thinking, orchestration, automation, interfaces, and product experiments by Al Fikri Kholil Misbah." />
+  <meta name="twitter:image" content="https://al-user12.github.io/assets/og-image.png" />
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <title>alfikri-labs - Secondary Portfolio</title>
   <style>
     :root {
@@ -248,10 +257,54 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(16, 16, 22, 0.1), rgba(16, 16, 22, 0.94)),
-        url("https://picsum.photos/seed/alfikri-labs-systems-architecture/1000/1300") center / cover;
+      background: linear-gradient(180deg, rgba(7, 7, 10, 0.16), rgba(7, 7, 10, 0.92));
       box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 32% 28%, rgba(199, 163, 90, 0.22), transparent 0 22%),
+        radial-gradient(circle at 72% 38%, rgba(123, 45, 55, 0.28), transparent 0 18%),
+        radial-gradient(circle at 52% 62%, rgba(255, 255, 255, 0.08), transparent 0 12%);
+      filter: blur(18px);
+      opacity: 0.9;
+      z-index: -1;
+    }
+
+    .motion-art {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .motion-art .orbit-ring {
+      transform-origin: 50% 50%;
+      animation: spinSlow 26s linear infinite;
+    }
+
+    .motion-art .orbit-ring.reverse {
+      animation-direction: reverse;
+      animation-duration: 34s;
+    }
+
+    .motion-art .node {
+      animation: pulseNode 5.2s ease-in-out infinite;
+    }
+
+    .motion-art .node.delay-a { animation-delay: 0.6s; }
+    .motion-art .node.delay-b { animation-delay: 1.3s; }
+    .motion-art .node.delay-c { animation-delay: 2s; }
+
+    .motion-art .beam {
+      stroke-dasharray: 14 14;
+      animation: dashFlow 8s linear infinite;
     }
 
     .hero-card::before {
@@ -507,6 +560,20 @@
       }
     }
 
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulseNode {
+      0%, 100% { opacity: 0.52; transform: scale(1); filter: drop-shadow(0 0 2px rgba(199, 163, 90, 0.4)); }
+      50% { opacity: 1; transform: scale(1.18); filter: drop-shadow(0 0 12px rgba(199, 163, 90, 0.8)); }
+    }
+
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -280; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
@@ -619,7 +686,7 @@
         <div class="reveal">
           <p class="kicker"><span class="kicker-line"></span> Secondary portfolio</p>
           <h1>Labs for useful systems.</h1>
-          <p class="hero-copy">A focused archive of AI tooling, backend architecture, automation, and product experiments by Al Fikri Kholil Misbah.</p>
+          <p class="hero-copy">A focused archive of system thinking, orchestration patterns, automation, interface experiments, and product logic by Al Fikri Kholil Misbah.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#work">View labs</a>
             <a class="button button-secondary" href="https://alfikri.xyz">Open main portfolio</a>
@@ -627,13 +694,47 @@
         </div>
 
         <aside class="hero-card reveal delay-1" aria-label="alfikri-labs visual summary">
+          <svg class="motion-art" viewBox="0 0 520 620" aria-hidden="true">
+            <defs>
+              <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f6d784" stop-opacity="0.95"/>
+                <stop offset="46%" stop-color="#c7a35a" stop-opacity="0.28"/>
+                <stop offset="100%" stop-color="#7b2d37" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="lineGold" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#f6d784" stop-opacity="0.2"/>
+                <stop offset="0.5" stop-color="#c7a35a" stop-opacity="0.82"/>
+                <stop offset="1" stop-color="#7b2d37" stop-opacity="0.18"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="520" height="620" fill="transparent"/>
+            <g transform="translate(260 300)">
+              <circle r="150" fill="url(#coreGlow)" opacity="0.74"/>
+              <g class="orbit-ring">
+                <ellipse rx="186" ry="72" fill="none" stroke="url(#lineGold)" stroke-width="1.4"/>
+                <circle class="node delay-a" cx="186" cy="0" r="6" fill="#f6d784"/>
+                <circle class="node delay-b" cx="-112" cy="58" r="4" fill="#c7a35a"/>
+              </g>
+              <g class="orbit-ring reverse">
+                <ellipse rx="92" ry="206" fill="none" stroke="rgba(246,241,232,0.22)" stroke-width="1.2" transform="rotate(28)"/>
+                <circle class="node delay-c" cx="22" cy="-204" r="5" fill="#f6d784" transform="rotate(28)"/>
+              </g>
+              <path class="beam" d="M-172 -92 C-88 -12, 12 -8, 180 106" fill="none" stroke="url(#lineGold)" stroke-width="2" opacity="0.72"/>
+              <path class="beam" d="M-184 116 C-58 54, 76 18, 166 -96" fill="none" stroke="rgba(246,241,232,0.2)" stroke-width="1.4"/>
+              <g opacity="0.98">
+                <rect x="-74" y="-94" width="148" height="188" rx="28" fill="rgba(7,7,10,0.62)" stroke="rgba(199,163,90,0.42)"/>
+                <path d="M0 -52 L52 56 H25 L14 28 H-16 L-28 56 H-54 L0 -52ZM-8 7H10L1 -18L-8 7Z" fill="#f6f1e8"/>
+                <circle cx="0" cy="0" r="108" fill="none" stroke="rgba(199,163,90,0.13)"/>
+              </g>
+            </g>
+          </svg>
           <div class="hero-card-content">
             <h2 style="font-size: 28px; margin-bottom: 10px;">Build log, not a museum.</h2>
-            <p style="margin-bottom: 0;">Experiments are selected for practical value: products shipped, systems integrated, workflows automated.</p>
+            <p style="margin-bottom: 0;">Experiments are selected by system value: flows clarified, layers connected, interfaces made useful, operations made calmer.</p>
             <div class="metric-grid" aria-label="Lab focus areas">
-              <div class="metric"><strong>AI</strong><span>agents and media systems</span></div>
-              <div class="metric"><strong>API</strong><span>backend and infra glue</span></div>
-              <div class="metric"><strong>UX</strong><span>product-ready prototypes</span></div>
+              <div class="metric"><strong>Map</strong><span>how pieces relate</span></div>
+              <div class="metric"><strong>Flow</strong><span>how work moves</span></div>
+              <div class="metric"><strong>Proof</strong><span>what users can trust</span></div>
             </div>
           </div>
         </aside>
@@ -642,29 +743,29 @@
 
     <section class="shell" id="work">
       <div class="section-heading reveal">
-        <h2>Selected lab tracks.</h2>
-        <p>Small enough to move fast, serious enough to become products. Each track points back to the main identity at alfikri.xyz.</p>
+        <h2>System lab tracks.</h2>
+        <p>Focused on whole systems: how signals enter, decisions form, interfaces guide action, and operations stay reliable.</p>
       </div>
       <div class="project-grid">
         <article class="project-card reveal delay-1" style="--image: url('https://picsum.photos/seed/voice-ai-dubbing-lab/900/700');">
-          <h3>Voice AI systems</h3>
-          <p>Speech workflows, dubbing pipelines, voice assistant experiments, and media automation.</p>
-          <div class="tag-row"><span class="tag">AI media</span><span class="tag">TTS</span><span class="tag">automation</span></div>
+          <h3>Intelligence layer</h3>
+          <p>Experiments around context, memory, reasoning loops, and assistant behavior as part of a wider operating system.</p>
+          <div class="tag-row"><span class="tag">context</span><span class="tag">memory</span><span class="tag">decision loops</span></div>
         </article>
         <article class="project-card reveal delay-2" style="--image: url('https://picsum.photos/seed/payment-backend-platform-lab/900/700');">
-          <h3>Payment and backend flows</h3>
-          <p>API orchestration, checkout experiments, webhook handling, and operational dashboards.</p>
-          <div class="tag-row"><span class="tag">Node.js</span><span class="tag">Laravel</span><span class="tag">webhooks</span></div>
+          <h3>System orchestration</h3>
+          <p>How separate parts coordinate: inputs, states, handoffs, feedback, and recovery paths across a product flow.</p>
+          <div class="tag-row"><span class="tag">states</span><span class="tag">handoffs</span><span class="tag">reliability</span></div>
         </article>
         <article class="project-card reveal delay-1" style="--image: url('https://picsum.photos/seed/agent-automation-lab/900/700');">
-          <h3>Agent automation</h3>
-          <p>Personal AI infrastructure, task runners, memory workflows, and multi-channel assistants.</p>
-          <div class="tag-row"><span class="tag">Hermes</span><span class="tag">agents</span><span class="tag">ops</span></div>
+          <h3>Operating workflows</h3>
+          <p>Practical systems that reduce friction: recurring tasks, monitoring, documentation, and cross-channel execution.</p>
+          <div class="tag-row"><span class="tag">routines</span><span class="tag">monitoring</span><span class="tag">execution</span></div>
         </article>
         <article class="project-card reveal delay-2" style="--image: url('https://picsum.photos/seed/socialfi-product-lab/900/700');">
-          <h3>Product prototypes</h3>
-          <p>SocialFi concepts, SaaS interfaces, market tools, and investor-ready product slices.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">SaaS</span><span class="tag">Web3</span></div>
+          <h3>Interface systems</h3>
+          <p>Prototype surfaces that make the system understandable: flows, states, trust cues, and user-facing clarity.</p>
+          <div class="tag-row"><span class="tag">flows</span><span class="tag">states</span><span class="tag">clarity</span></div>
         </article>
       </div>
     </section>
@@ -673,39 +774,39 @@
       <div class="lab-strip">
         <div class="panel reveal">
           <div class="panel-body">
-            <h2>How this lab thinks.</h2>
-            <p>Every experiment has to earn its place: one clear problem, one useful workflow, one path toward a stronger production system.</p>
-            <div class="tag-row"><span class="tag">problem first</span><span class="tag">ship fast</span><span class="tag">verify output</span></div>
+            <h2>How this lab thinks in systems.</h2>
+            <p>Every experiment has to show the relationship between parts: signal, decision, interface, operation, and consequence.</p>
+            <div class="tag-row"><span class="tag">map the system</span><span class="tag">reduce friction</span><span class="tag">verify behavior</span></div>
           </div>
         </div>
         <div class="panel reveal delay-1">
           <div class="panel-body">
             <h3>Public signal</h3>
-            <p>This page is intentionally narrower than the main portfolio. It shows the workshop: builds, experiments, and systems in motion.</p>
+            <p>This page is intentionally narrower than the main portfolio. It shows the workshop: system maps, moving parts, experiments, and proof of behavior.</p>
           </div>
         </div>
       </div>
 
       <div class="capability-grid" style="margin-top: 20px;">
         <article class="capability reveal delay-1">
-          <h3>Backend architecture</h3>
-          <p>Services, APIs, queues, databases, and deployment flows designed to survive real users.</p>
+          <h3>System architecture</h3>
+          <p>Structures for making many moving parts understandable, testable, resilient, and useful under real constraints.</p>
         </article>
         <article class="capability reveal delay-2">
-          <h3>AI workflows</h3>
-          <p>Agent tooling, voice systems, retrieval, summarization, and practical automation layers.</p>
+          <h3>Intelligence workflows</h3>
+          <p>Context, reasoning, memory, and automation shaped into usable workflows instead of isolated tricks.</p>
         </article>
         <article class="capability reveal delay-3">
-          <h3>Product polish</h3>
-          <p>Demo flows shaped into clear interfaces with believable states and judge-ready stories.</p>
+          <h3>Interface clarity</h3>
+          <p>Screens and interactions that expose what the system is doing without overwhelming the person using it.</p>
         </article>
         <article class="capability reveal delay-1">
-          <h3>Operational glue</h3>
-          <p>Scripts, cron jobs, integrations, and internal tools that reduce manual drag across daily work.</p>
+          <h3>Operational rhythm</h3>
+          <p>Routine execution, monitoring, reminders, and feedback loops that keep a system alive after launch.</p>
         </article>
         <article class="capability reveal delay-2">
-          <h3>Security mindset</h3>
-          <p>Threat-aware engineering habits for auth, payments, automation, and public-facing systems.</p>
+          <h3>Trust boundary thinking</h3>
+          <p>A habit of asking where trust begins, where it ends, and how the system behaves when something goes wrong.</p>
         </article>
       </div>
     </section>
