@@ -260,11 +260,12 @@
 
     h1 {
       font-size: clamp(46px, 7vw, 92px);
-      line-height: 0.96;
+      line-height: 1.04;
       letter-spacing: -0.075em;
-      max-width: 9ch;
+      max-width: 10.4ch;
       margin-bottom: 24px;
       color: #101624;
+      overflow: visible;
     }
 
     h1 span,
@@ -273,6 +274,14 @@
       background: linear-gradient(110deg, #172033 0%, #6c8cff 46%, #2dd4bf 100%);
       -webkit-background-clip: text;
       background-clip: text;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    h1 span {
+      display: inline-block;
+      padding: 0.04em 0.1em 0.12em 0;
+      margin-right: -0.1em;
     }
 
     .hero-copy {
@@ -493,7 +502,7 @@
       position: absolute;
       inset: 0;
       z-index: -2;
-      opacity: 0.58;
+      opacity: 0.72;
       background: var(--image) center / cover;
       animation: imageFloat 12s var(--ease-out) infinite;
       animation-delay: var(--drift-delay, 0ms);
@@ -504,26 +513,26 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: var(--card-wash, linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(244, 248, 255, 0.74)));
+      background: var(--card-wash, linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(244, 248, 255, 0.56)));
     }
 
     .project-card:nth-child(1) {
-      --card-wash: linear-gradient(180deg, rgba(248, 250, 255, 0.84), rgba(226, 235, 255, 0.76));
+      --card-wash: linear-gradient(180deg, rgba(248, 250, 255, 0.7), rgba(226, 235, 255, 0.56));
       --drift-delay: 120ms;
     }
 
     .project-card:nth-child(2) {
-      --card-wash: linear-gradient(180deg, rgba(247, 253, 250, 0.84), rgba(218, 244, 239, 0.76));
+      --card-wash: linear-gradient(180deg, rgba(247, 253, 250, 0.7), rgba(218, 244, 239, 0.56));
       --drift-delay: 680ms;
     }
 
     .project-card:nth-child(3) {
-      --card-wash: linear-gradient(180deg, rgba(255, 250, 245, 0.84), rgba(255, 232, 210, 0.76));
+      --card-wash: linear-gradient(180deg, rgba(255, 250, 245, 0.7), rgba(255, 232, 210, 0.56));
       --drift-delay: 320ms;
     }
 
     .project-card:nth-child(4) {
-      --card-wash: linear-gradient(180deg, rgba(253, 247, 255, 0.84), rgba(239, 226, 255, 0.76));
+      --card-wash: linear-gradient(180deg, rgba(253, 247, 255, 0.7), rgba(239, 226, 255, 0.56));
       --drift-delay: 920ms;
     }
 
