@@ -30,11 +30,14 @@
       --line: rgba(137, 158, 184, 0.22);
       --accent: #6c8cff;
       --accent-deep: #8b5cf6;
+      --accent-soft: #90a1ff;
+      --text-soft: #334155;
       --ink: #f8fbff;
       --radius-lg: 28px;
       --radius-md: 18px;
       --radius-sm: 12px;
       --shadow: 0 24px 80px rgba(113, 133, 168, 0.18);
+      --shadow-soft: 0 18px 48px rgba(113, 133, 168, 0.14);
       --max: 1160px;
     }
 
@@ -152,6 +155,7 @@
     .nav-links a:focus-visible {
       background: rgba(255, 255, 255, 0.44);
       color: var(--text);
+      transform: translateY(-1px);
       outline: none;
     }
 
@@ -171,6 +175,11 @@
 
     .button:active {
       transform: translateY(1px) scale(0.99);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
     }
 
     .button-primary {
@@ -269,6 +278,8 @@
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(244, 248, 255, 0.62));
       box-shadow: var(--shadow);
       isolation: isolate;
+      transform: translateZ(0);
+      animation: floatCard 7s ease-in-out infinite;
     }
 
     .hero-card::after {
@@ -333,6 +344,7 @@
       border: 1px solid rgba(255,255,255,0.48);
       background: rgba(255, 255, 255, 0.52);
       backdrop-filter: blur(24px) saturate(160%);
+      box-shadow: var(--shadow-soft);
     }
 
     .metric-grid {
@@ -393,8 +405,10 @@
     .panel {
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(255,255,255,0.66), rgba(245,248,255,0.52)); backdrop-filter: blur(20px) saturate(150%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(245,248,255,0.54));
+      backdrop-filter: blur(20px) saturate(150%);
       overflow: hidden;
+      box-shadow: var(--shadow-soft);
     }
 
     .panel-body {
@@ -417,15 +431,18 @@
       border: 1px solid var(--line);
       overflow: hidden;
       position: relative;
-      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(245,248,255,0.58)); backdrop-filter: blur(22px) saturate(150%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(245,248,255,0.58));
+      backdrop-filter: blur(22px) saturate(150%);
       isolation: isolate;
-      transition: transform 220ms ease, border-color 220ms ease;
+      box-shadow: 0 14px 42px rgba(113, 133, 168, 0.1);
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
     }
 
     .project-card:hover,
     .project-card:focus-within {
       transform: translateY(-4px);
-      border-color: rgba(199, 163, 90, 0.48);
+      border-color: rgba(108, 140, 255, 0.34);
+      box-shadow: 0 22px 58px rgba(113, 133, 168, 0.16);
     }
 
     .project-card::before {
@@ -442,21 +459,27 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(244, 248, 255, 0.62));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(244, 248, 255, 0.74));
     }
 
     .project-card h3,
     .capability h3,
+    .panel h3 {
       font-size: 24px;
-      line-height: 1.1;
-      letter-spacing: -0.04em;
+      line-height: 1.08;
+      letter-spacing: -0.045em;
       margin-bottom: 10px;
+      color: var(--text);
     }
 
     .project-card p,
     .capability p,
     .panel p {
       color: var(--muted);
+    }
+
+    .project-card p {
+      color: var(--text-soft);
     }
 
     .tag-row {
@@ -487,11 +510,22 @@
       padding: 26px;
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
-      background: linear-gradient(180deg, rgba(255,255,255,0.68), rgba(243,247,252,0.52)); backdrop-filter: blur(20px) saturate(150%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(243,247,252,0.52));
+      backdrop-filter: blur(20px) saturate(150%);
+      box-shadow: 0 12px 34px rgba(113, 133, 168, 0.1);
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .capability:hover,
+    .capability:focus-within {
+      transform: translateY(-4px);
+      border-color: rgba(108, 140, 255, 0.32);
+      box-shadow: 0 20px 52px rgba(113, 133, 168, 0.15);
     }
 
     .capability:nth-child(2) {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(255,255,255,0.56)); backdrop-filter: blur(20px) saturate(150%);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(255,255,255,0.56));
+      backdrop-filter: blur(20px) saturate(150%);
     }
 
     .capability:nth-child(4) {
@@ -503,7 +537,8 @@
     }
 
     .capability:nth-child(5) {
-      background: linear-gradient(135deg, rgba(108, 140, 255, 0.14), rgba(255,255,255,0.56)); backdrop-filter: blur(20px) saturate(150%);
+      background: linear-gradient(135deg, rgba(108, 140, 255, 0.14), rgba(255,255,255,0.56));
+      backdrop-filter: blur(20px) saturate(150%);
     }
 
     .bridge {
@@ -549,6 +584,14 @@
 
     .footer a {
       color: var(--text);
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .footer a:hover,
+    .footer a:focus-visible {
+      color: var(--accent);
+      transform: translateY(-1px);
+      outline: none;
     }
 
     .reveal {
@@ -582,6 +625,11 @@
 
     @keyframes dashFlow {
       to { stroke-dashoffset: -280; }
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(0, -8px, 0); }
     }
 
     @media (prefers-reduced-motion: reduce) {
