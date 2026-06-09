@@ -1,169 +1,739 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Al Fikri Kholil Misbah Nur - Royal Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Merriweather&display=swap" rel="stylesheet">
+  <meta name="description" content="alfikri-labs is the secondary portfolio of Al Fikri Kholil Misbah, focused on AI systems, backend architecture, automation, and experimental product builds." />
+  <meta name="theme-color" content="#07070a" />
+  <meta property="og:title" content="alfikri-labs - Experiments by Al Fikri" />
+  <meta property="og:description" content="Secondary portfolio for AI systems, backend architecture, automation, and product experiments by Al Fikri Kholil Misbah." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://al-user12.github.io" />
+  <title>alfikri-labs - Secondary Portfolio</title>
   <style>
     :root {
-      --royal-bg: #1e102a;
-      --royal-text: #f3e8ff;
-      --royal-frame: rgba(44, 24, 77, 0.95);
-      --royal-gold: #d4af37;
+      color-scheme: dark;
+      --bg: #07070a;
+      --surface: #101016;
+      --surface-soft: #171721;
+      --text: #f6f1e8;
+      --muted: #b8ad9d;
+      --line: rgba(246, 241, 232, 0.14);
+      --accent: #c7a35a;
+      --accent-deep: #7b2d37;
+      --ink: #050507;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --max: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
     }
 
     body {
-      font-family: 'Cinzel', serif;
-      background: var(--royal-bg) url('https://www.transparenttextures.com/patterns/damask.png');
-      color: var(--royal-text);
-      transition: background 0.5s ease, color 0.5s ease;
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 80% 4%, rgba(123, 45, 55, 0.28), transparent 34rem),
+        radial-gradient(circle at 8% 20%, rgba(199, 163, 90, 0.16), transparent 24rem),
+        linear-gradient(180deg, #07070a 0%, #0d0d13 48%, #07070a 100%);
+      color: var(--text);
+      min-height: 100dvh;
+      line-height: 1.6;
     }
 
-    body.light {
-      --royal-bg: #fefbf3;
-      --royal-text: #2c1a4d;
-      --royal-frame: rgba(255, 255, 255, 0.9);
-    }
-
-    .golden-frame {
-      border: 2px solid var(--royal-gold);
-      background: var(--royal-frame);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
-      transition: all 0.4s ease;
-    }
-
-    .btn-royal {
-      background-color: var(--royal-gold);
-      color: var(--royal-bg);
-      transition: all 0.3s ease;
-    }
-
-    .btn-royal:hover {
-      background-color: #b8962b;
-      transform: scale(1.05);
-    }
-
-    .theme-toggle {
+    body::before {
+      content: "";
       position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 50;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(246, 241, 232, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(246, 241, 232, 0.035) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
     }
 
-    .vault-badge {
-      background-color: var(--royal-gold);
-      color: var(--royal-bg);
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
-      font-weight: bold;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .vault-badge:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px var(--royal-gold);
+    img {
+      display: block;
+      max-width: 100%;
     }
 
-    .gallery-card {
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    .shell {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
     }
 
-    .gallery-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 7, 10, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 760;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(199, 163, 90, 0.96), rgba(123, 45, 55, 0.95));
+      color: var(--ink);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36);
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      background: rgba(246, 241, 232, 0.08);
+      color: var(--text);
+      outline: none;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 720;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .button:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: var(--ink);
+      box-shadow: 0 14px 30px rgba(199, 163, 90, 0.16);
+    }
+
+    .button-primary:hover,
+    .button-primary:focus-visible {
+      background: #d7b769;
+      outline: none;
+    }
+
+    .button-secondary {
+      border-color: var(--line);
+      color: var(--text);
+      background: rgba(246, 241, 232, 0.04);
+    }
+
+    .button-secondary:hover,
+    .button-secondary:focus-visible {
+      border-color: rgba(199, 163, 90, 0.52);
+      outline: none;
+    }
+
+    .hero {
+      min-height: calc(100dvh - 72px);
+      display: grid;
+      align-items: center;
+      padding: 72px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 20px;
+    }
+
+    .kicker-line {
+      width: 38px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.68;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(46px, 7vw, 92px);
+      line-height: 0.96;
+      letter-spacing: -0.075em;
+      max-width: 9ch;
+      margin-bottom: 24px;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      max-width: 58ch;
+      font-size: clamp(17px, 2vw, 20px);
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(16, 16, 22, 0.1), rgba(16, 16, 22, 0.94)),
+        url("https://picsum.photos/seed/alfikri-labs-systems-architecture/1000/1300") center / cover;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(199, 163, 90, 0.32);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+
+    .hero-card-content {
+      position: absolute;
+      inset: auto 24px 24px;
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid rgba(246, 241, 232, 0.16);
+      background: rgba(7, 7, 10, 0.72);
+      backdrop-filter: blur(18px);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .metric {
+      padding: 14px;
+      border: 1px solid rgba(246, 241, 232, 0.12);
+      border-radius: var(--radius-sm);
+      background: rgba(246, 241, 232, 0.045);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--text);
+      font-size: 20px;
+      letter-spacing: -0.04em;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+      margin-bottom: 14px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 62ch;
+    }
+
+    .lab-strip {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(246, 241, 232, 0.06), rgba(246, 241, 232, 0.025));
+      overflow: hidden;
+    }
+
+    .panel-body {
+      padding: 30px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .project-card {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      position: relative;
+      background: var(--surface);
+      isolation: isolate;
+      transition: transform 220ms ease, border-color 220ms ease;
+    }
+
+    .project-card:hover,
+    .project-card:focus-within {
+      transform: translateY(-4px);
+      border-color: rgba(199, 163, 90, 0.48);
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.58;
+      background: var(--image) center / cover;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(7, 7, 10, 0.16), rgba(7, 7, 10, 0.92));
+    }
+
+    .project-card h3,
+    .capability h3 {
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+
+    .project-card p,
+    .capability p,
+    .panel p {
+      color: var(--muted);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 7px 10px;
+      border: 1px solid rgba(246, 241, 232, 0.14);
+      border-radius: 999px;
+      background: rgba(246, 241, 232, 0.06);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .capability {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(16, 16, 22, 0.72);
+    }
+
+    .capability:nth-child(2) {
+      background: linear-gradient(135deg, rgba(123, 45, 55, 0.28), rgba(16, 16, 22, 0.72));
+    }
+
+    .capability:nth-child(4) {
+      grid-column: span 2;
+      background:
+        linear-gradient(90deg, rgba(7, 7, 10, 0.92), rgba(7, 7, 10, 0.64)),
+        url("https://picsum.photos/seed/backend-automation-console/1200/700") center / cover;
+    }
+
+    .capability:nth-child(5) {
+      background: linear-gradient(135deg, rgba(199, 163, 90, 0.18), rgba(16, 16, 22, 0.72));
+    }
+
+    .bridge {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 20px;
+      align-items: center;
+      border: 1px solid rgba(199, 163, 90, 0.32);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(199, 163, 90, 0.1), rgba(123, 45, 55, 0.12));
+      overflow: hidden;
+    }
+
+    .bridge-visual {
+      min-height: 360px;
+      background:
+        linear-gradient(180deg, rgba(7, 7, 10, 0.1), rgba(7, 7, 10, 0.84)),
+        url("https://picsum.photos/seed/alfikri-main-portfolio-bridge/900/900") center / cover;
+    }
+
+    .bridge-copy {
+      padding: 34px;
+    }
+
+    .footer {
+      padding: 54px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: var(--text);
+    }
+
+    .reveal {
+      animation: rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .delay-1 { animation-delay: 90ms; }
+    .delay-2 { animation-delay: 180ms; }
+    .delay-3 { animation-delay: 270ms; }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav-inner {
+        min-height: auto;
+        padding: 16px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 56px;
+      }
+
+      .hero-grid,
+      .lab-strip,
+      .bridge {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: 100%;
+      }
+
+      .hero-card {
+        min-height: 420px;
+      }
+
+      .project-grid,
+      .capability-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .capability:nth-child(4) {
+        grid-column: auto;
+      }
+
+      .footer-grid {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        width: min(100% - 28px, var(--max));
+      }
+
+      section {
+        padding: 64px 0;
+      }
+
+      .hero-actions,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .metric-grid {
+        display: grid;
+      }
+
+      .hero-card-content,
+      .panel-body,
+      .bridge-copy {
+        padding: 22px;
+      }
     }
   </style>
 </head>
+<body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="shell nav-inner">
+      <a class="brand" href="#top" aria-label="alfikri-labs home">
+        <span class="brand-mark">A</span>
+        <span>alfikri-labs</span>
+      </a>
+      <div class="nav-links" aria-label="Section links">
+        <a href="#work">Work</a>
+        <a href="#systems">Systems</a>
+        <a href="#bridge">Main site</a>
+        <a href="https://alfikri.xyz">alfikri.xyz</a>
+      </div>
+    </div>
+  </nav>
 
-<body class="overflow-x-hidden">
-  <!-- Theme Toggle -->
-  <button onclick="toggleTheme()" class="theme-toggle btn-royal px-4 py-2 rounded shadow">🎨 Toggle Theme</button>
-
-  <!-- Signature Seal Animation -->
-  <div id="seal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 text-yellow-300 text-5xl font-bold tracking-widest">
-    ✒️ A.F.K.M.N
-  </div>
-
-  <header class="text-center py-20 bg-gradient-to-b from-purple-900 to-purple-950 text-white">
-    <h1 class="text-4xl md:text-6xl font-bold tracking-wide">Al Fikri Kholil Misbah Nur</h1>
-    <p class="mt-4 text-xl italic">Backend Architect & Digital Artisan</p>
-  </header>
-
-  <main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
-    <!-- Royal Decree -->
-    <section class="golden-frame rounded-xl p-10 text-center" id="decree">
-      <h2 class="text-3xl font-bold mb-4">Royal Decree</h2>
-      <p class="text-lg">By honour and mastery, I, a humble servant of the digital realm, present my expertise in backend craft, wielding Node.js, TypeScript, Python, and Laravel. My noble pursuits lie in the creation of intelligent artefacts, the securing of kingdoms through blockchain, and the fortification of systems both vast and subtle.</p>
-    </section>
-
-    <!-- Gallery of Works -->
-    <section class="space-y-10" id="gallery">
-      <h2 class="text-3xl font-bold text-center mb-4">Gallery of Works</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="golden-frame gallery-card rounded-xl p-6 text-center cursor-pointer">
-          <h3 class="text-2xl font-bold mb-2">🧠 Oracle of Voice</h3>
-          <p class="text-sm">Arcane AI sorcery in sonic form.</p>
+  <main id="top">
+    <header class="hero shell">
+      <div class="hero-grid">
+        <div class="reveal">
+          <p class="kicker"><span class="kicker-line"></span> Secondary portfolio</p>
+          <h1>Labs for useful systems.</h1>
+          <p class="hero-copy">A focused archive of AI tooling, backend architecture, automation, and product experiments by Al Fikri Kholil Misbah.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#work">View labs</a>
+            <a class="button button-secondary" href="https://alfikri.xyz">Open main portfolio</a>
+          </div>
         </div>
-        <div class="golden-frame gallery-card rounded-xl p-6 text-center cursor-pointer">
-          <h3 class="text-2xl font-bold mb-2">⚙️ Ledger of the Chainbound Guild</h3>
-          <p class="text-sm">Blockchain-bound enterprise scrolls.</p>
-        </div>
-        <div class="golden-frame gallery-card rounded-xl p-6 text-center cursor-pointer">
-          <h3 class="text-2xl font-bold mb-2">🏰 Merchant Hall of Many Banners</h3>
-          <p class="text-sm">Multitenant trade under one crown.</p>
-        </div>
+
+        <aside class="hero-card reveal delay-1" aria-label="alfikri-labs visual summary">
+          <div class="hero-card-content">
+            <h2 style="font-size: 28px; margin-bottom: 10px;">Build log, not a museum.</h2>
+            <p style="margin-bottom: 0;">Experiments are selected for practical value: products shipped, systems integrated, workflows automated.</p>
+            <div class="metric-grid" aria-label="Lab focus areas">
+              <div class="metric"><strong>AI</strong><span>agents and media systems</span></div>
+              <div class="metric"><strong>API</strong><span>backend and infra glue</span></div>
+              <div class="metric"><strong>UX</strong><span>product-ready prototypes</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="shell" id="work">
+      <div class="section-heading reveal">
+        <h2>Selected lab tracks.</h2>
+        <p>Small enough to move fast, serious enough to become products. Each track points back to the main identity at alfikri.xyz.</p>
+      </div>
+      <div class="project-grid">
+        <article class="project-card reveal delay-1" style="--image: url('https://picsum.photos/seed/voice-ai-dubbing-lab/900/700');">
+          <h3>Voice AI systems</h3>
+          <p>Speech workflows, dubbing pipelines, voice assistant experiments, and media automation.</p>
+          <div class="tag-row"><span class="tag">AI media</span><span class="tag">TTS</span><span class="tag">automation</span></div>
+        </article>
+        <article class="project-card reveal delay-2" style="--image: url('https://picsum.photos/seed/payment-backend-platform-lab/900/700');">
+          <h3>Payment and backend flows</h3>
+          <p>API orchestration, checkout experiments, webhook handling, and operational dashboards.</p>
+          <div class="tag-row"><span class="tag">Node.js</span><span class="tag">Laravel</span><span class="tag">webhooks</span></div>
+        </article>
+        <article class="project-card reveal delay-1" style="--image: url('https://picsum.photos/seed/agent-automation-lab/900/700');">
+          <h3>Agent automation</h3>
+          <p>Personal AI infrastructure, task runners, memory workflows, and multi-channel assistants.</p>
+          <div class="tag-row"><span class="tag">Hermes</span><span class="tag">agents</span><span class="tag">ops</span></div>
+        </article>
+        <article class="project-card reveal delay-2" style="--image: url('https://picsum.photos/seed/socialfi-product-lab/900/700');">
+          <h3>Product prototypes</h3>
+          <p>SocialFi concepts, SaaS interfaces, market tools, and investor-ready product slices.</p>
+          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">SaaS</span><span class="tag">Web3</span></div>
+        </article>
       </div>
     </section>
 
-    <!-- The Vault (Tech Stack) -->
-    <section class="golden-frame rounded-xl p-10 text-center">
-      <h2 class="text-3xl font-bold mb-6">The Vault</h2>
-      <p class="mb-6">Behold the sacred instruments wielded by mine hand in digital alchemy:</p>
-      <div class="flex flex-wrap justify-center gap-4 text-sm">
-        <span class="vault-badge">Node.js</span>
-        <span class="vault-badge">TypeScript</span>
-        <span class="vault-badge">Python</span>
-        <span class="vault-badge">Laravel</span>
-        <span class="vault-badge">PostgreSQL</span>
-        <span class="vault-badge">Docker</span>
-        <span class="vault-badge">Redis</span>
-        <span class="vault-badge">Prisma</span>
+    <section class="shell" id="systems">
+      <div class="lab-strip">
+        <div class="panel reveal">
+          <div class="panel-body">
+            <h2>How this lab thinks.</h2>
+            <p>Every experiment has to earn its place: one clear problem, one useful workflow, one path toward a stronger production system.</p>
+            <div class="tag-row"><span class="tag">problem first</span><span class="tag">ship fast</span><span class="tag">verify output</span></div>
+          </div>
+        </div>
+        <div class="panel reveal delay-1">
+          <div class="panel-body">
+            <h3>Public signal</h3>
+            <p>This page is intentionally narrower than the main portfolio. It shows the workshop: builds, experiments, and systems in motion.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="capability-grid" style="margin-top: 20px;">
+        <article class="capability reveal delay-1">
+          <h3>Backend architecture</h3>
+          <p>Services, APIs, queues, databases, and deployment flows designed to survive real users.</p>
+        </article>
+        <article class="capability reveal delay-2">
+          <h3>AI workflows</h3>
+          <p>Agent tooling, voice systems, retrieval, summarization, and practical automation layers.</p>
+        </article>
+        <article class="capability reveal delay-3">
+          <h3>Product polish</h3>
+          <p>Demo flows shaped into clear interfaces with believable states and judge-ready stories.</p>
+        </article>
+        <article class="capability reveal delay-1">
+          <h3>Operational glue</h3>
+          <p>Scripts, cron jobs, integrations, and internal tools that reduce manual drag across daily work.</p>
+        </article>
+        <article class="capability reveal delay-2">
+          <h3>Security mindset</h3>
+          <p>Threat-aware engineering habits for auth, payments, automation, and public-facing systems.</p>
+        </article>
       </div>
     </section>
 
-    <!-- Council Chamber (Contact) -->
-    <section class="golden-frame rounded-xl p-10 text-center">
-      <h2 class="text-3xl font-bold mb-6">Council Chamber</h2>
-      <p class="mb-6">Dispatch thy message or propose alliance through the following means:</p>
-      <div class="flex justify-center space-x-4">
-        <a href="mailto:alfikridev@gmail.com" class="btn-royal px-6 py-3 rounded-full font-semibold shadow-md">📧 Send a Scroll</a>
-        <a href="https://linkedin.com/in/alfikrikm" target="_blank" class="btn-royal px-6 py-3 rounded-full font-semibold shadow-md">🔗 Connect on LinkedIn</a>
+    <section class="shell" id="bridge">
+      <div class="bridge reveal">
+        <div class="bridge-visual" role="img" aria-label="Abstract bridge between alfikri-labs and alfikri.xyz"></div>
+        <div class="bridge-copy">
+          <h2>Need the main profile?</h2>
+          <p>The flagship portfolio lives at alfikri.xyz. Use this lab page for experiments and supporting proof, then return to the main site for identity, story, and selected production work.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://alfikri.xyz">Visit alfikri.xyz</a>
+            <a class="button button-secondary" href="https://github.com/Al-User12">GitHub profile</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="text-center py-6 text-sm bg-purple-950 text-white border-t border-yellow-500">
-    &copy; 2025 Al Fikri Kholil Misbah Nur | Crafted with Dignity & Precision ⚜️
+  <footer class="footer">
+    <div class="shell footer-grid">
+      <p>alfikri-labs. Secondary portfolio for selected experiments by Al Fikri Kholil Misbah.</p>
+      <div class="footer-links">
+        <a href="https://alfikri.xyz">alfikri.xyz</a>
+        <a href="https://github.com/Al-User12">GitHub</a>
+        <a href="https://linkedin.com/in/alfikrikm">LinkedIn</a>
+      </div>
+    </div>
   </footer>
-
-  <script>
-    // Signature Seal Animation
-    window.addEventListener('load', () => {
-      const seal = document.getElementById('seal');
-      gsap.to(seal, { opacity: 0, duration: 1.5, delay: 1, onComplete: () => seal.style.display = 'none' });
-    });
-
-    // Theme toggle
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-    }
-  </script>
 </body>
-
 </html>
