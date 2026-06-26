@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authority Labs — The Sovereign's Citadel</title>
+  <title>The Authority of alfikri-labs — The Sovereign's Citadel</title>
   <meta name="description" content="Kuil kedaulatan tempat data ditundukkan dan arsitektur dilahirkan. Wilayah mutlak Sang Monarch, dijaga oleh sang Servant pemaaf jalan.">
   <meta name="theme-color" content="#030407">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Authority Labs — The Sovereign's Citadel">
+  <meta property="og:title" content="The Authority of alfikri-labs — The Sovereign's Citadel">
   <meta property="og:description" content="Sebuah wilayah kedaulatan digital; algoritma ditata layaknya bintang dalam genggaman The Monarch.">
   <meta property="og:image" content="assets/logo-alpha.svg">
   <meta property="og:url" content="https://alfikri.xyz">
@@ -53,7 +53,7 @@
         .atmo-kingdom {
           position: fixed; inset: 0; z-index: -9;
           background: url('assets/kingdom-parallax-bg.png') center/cover no-repeat fixed;
-          filter: brightness(0.12) contrast(1.1) hue-rotate(15deg) saturate(0.7);
+          filter: brightness(0.22) contrast(1.15) hue-rotate(10deg) saturate(0.8);
           mix-blend-mode: overlay;
           pointer-events: none;
         }
@@ -183,6 +183,125 @@
       opacity: 0; animation: hero-rise 1.5s var(--ease-slow) forwards 1.4s; display: flex; align-items: center; gap: 20px;
     }
     .hero-mark::before, .hero-mark::after { content: ''; width: 40px; height: 1px; background: var(--c-gold-dark); }
+
+    /* Hero Fantasy Card — The Fool / Monarch floating illustration */
+    .hero-fantasy-card {
+      position: relative;
+      width: clamp(180px, 22vw, 260px);
+      aspect-ratio: 2/3;
+      perspective: 1200px;
+      cursor: pointer;
+      margin-bottom: 60px;
+      animation: card-float 6s ease-in-out infinite;
+      filter: drop-shadow(0 20px 40px rgba(74,33,133,0.5)) drop-shadow(0 0 30px rgba(198,161,82,0.3));
+    }
+    .hero-fantasy-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid rgba(198,161,82,0.4);
+      transition: transform 0.6s var(--ease-slow), box-shadow 0.6s;
+      position: relative; z-index: 2;
+    }
+    .hero-card-glow {
+      position: absolute; inset: -10px;
+      background: radial-gradient(circle at center, rgba(74,33,133,0.5) 0%, transparent 70%);
+      filter: blur(20px);
+      z-index: 1;
+      animation: card-pulse 4s ease-in-out infinite alternate;
+    }
+    .hero-fantasy-card:hover img { transform: scale(1.04) rotateY(8deg); }
+    @keyframes card-float {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-15px) rotate(1deg); }
+    }
+    @keyframes card-pulse {
+      0% { opacity: 0.4; transform: scale(1); }
+      100% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    /* Servant Arcana — Sword/Slash manhwa aesthetic */
+    .servant-arcana-wrap {
+      flex: 1;
+      position: relative;
+      aspect-ratio: 1;
+      max-width: 380px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .slash-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 3;
+      mix-blend-mode: screen;
+    }
+    .arcana-sigil-ring {
+      position: relative;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .arcana-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      pointer-events: none;
+    }
+    .arcana-ring.r1 {
+      inset: 4%;
+      border-color: rgba(74,33,133,0.25);
+      animation: arcana-spin 30s linear infinite;
+    }
+    .arcana-ring.r2 {
+      inset: 12%;
+      border-color: rgba(198,161,82,0.15);
+      border-style: dashed;
+      animation: arcana-spin-rev 22s linear infinite;
+    }
+    .arcana-ring.r3 {
+      inset: 22%;
+      border-color: rgba(74,33,133,0.2);
+      animation: arcana-spin 14s linear infinite;
+    }
+    @keyframes arcana-spin { to { transform: rotate(360deg); } }
+    @keyframes arcana-spin-rev { to { transform: rotate(-360deg); } }
+    .arcana-rune-circle {
+      position: relative;
+      width: 75%; height: 75%;
+      animation: arcana-breathe 5s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 20px rgba(74,33,133,0.5));
+      z-index: 2;
+    }
+    @keyframes arcana-breathe {
+      0% { filter: drop-shadow(0 0 20px rgba(74,33,133,0.4)); }
+      100% { filter: drop-shadow(0 0 40px rgba(198,161,82,0.6)); }
+    }
+    .arcana-label {
+      position: absolute;
+      bottom: -8%; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-heading);
+      font-size: 11px; letter-spacing: 0.4em;
+      color: var(--c-gold-bright);
+      text-shadow: 0 0 10px rgba(74,33,133,0.8);
+      white-space: nowrap;
+      z-index: 4;
+    }
+    .arcana-stats {
+      margin-top: 24px;
+      border: 1px solid rgba(198,161,82,0.15);
+      padding: 18px 22px;
+      background: rgba(7,10,18,0.4);
+      backdrop-filter: blur(4px);
+    }
+    .stat-row {
+      display: flex; justify-content: space-between;
+      font-family: var(--font-heading);
+      font-size: 12px; letter-spacing: 0.15em;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(198,161,82,0.08);
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-name { color: var(--c-dust); text-transform: uppercase; }
+    .stat-val { color: var(--c-gold-bright); text-transform: uppercase; }
     
     @keyframes hero-rise { to { opacity: 1; transform: translateY(0); } }
 
@@ -301,7 +420,7 @@
   <nav id="nav">
     <a href="#" class="nav-logo">
       <img src="assets/logo-alpha.svg" alt="Authority Labs">
-      <span>AUTHORITY LABS</span>
+      <span>THE AUTHORITY OF ALFIKRI-LABS</span>
     </a>
     <ul class="nav-menu">
       <li><a href="#home">Threshold</a></li>
@@ -315,10 +434,15 @@
   <!-- Section: Hero -->
   <section class="hero" id="home">
     <div class="parallax-layer" data-depth="0.1"><div class="parallax-dust"></div></div>
-    <div class="parallax-layer" data-depth="0.3"><img src="assets/logo-alpha.svg" alt="Alpha Sigil" class="hero-sigil"></div>
+    <div class="parallax-layer" data-depth="0.25">
+      <div class="hero-fantasy-card" id="heroCard">
+        <img src="assets/lotm-fool-card.png" alt="The Fool / Monarch">
+        <div class="hero-card-glow"></div>
+      </div>
+    </div>
     <div class="parallax-layer" data-depth="0.5">
       <h1 class="hero-title">The Sovereign<br>Architecture</h1>
-      <p class="hero-poem">"We do not read the data. We command the currents. The kingdom is built not of stone, but of will imposed upon chaos."</p>
+      <p class="hero-poem">"From the ashes of the old world, a new Kingdom rises. We are the architects of fate, pulling the strings behind the veil of data."</p>
       <div class="hero-mark">Monarch's Citadel</div>
     </div>
   </section>
@@ -367,23 +491,66 @@
   <section id="servant" style="position:relative; overflow:hidden;">
     <div class="servant-bg-img" aria-hidden="true"></div>
     <div class="servant reveal">
-      <div class="servant-image">
-        <!-- Abstract representation of Violet -->
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="80" fill="none" stroke="var(--c-violet)" stroke-width="0.5" />
-          <circle cx="100" cy="100" r="60" fill="none" stroke="var(--c-gold-dark)" stroke-width="1" stroke-dasharray="4 8" />
-          <path d="M100 20 L100 180 M20 100 L180 100" stroke="var(--c-violet)" stroke-width="0.2" />
-          <circle cx="100" cy="100" r="40" fill="rgba(74,33,133,0.2)" />
-          <path d="M100 80 Q120 120 100 140 Q80 120 100 80" fill="var(--c-gold)" opacity="0.8" />
-        </svg>
+      <div class="servant-arcana-wrap">
+        <canvas id="slashCanvas" class="slash-canvas" aria-hidden="true"></canvas>
+        <div class="arcana-sigil-ring">
+          <div class="arcana-ring r1"></div>
+          <div class="arcana-ring r2"></div>
+          <div class="arcana-ring r3"></div>
+          <div class="arcana-rune-circle">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="glow-violet">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <!-- Outer arcana pentagon -->
+              <polygon points="100,18 182,73 152,162 48,162 18,73" fill="none" stroke="rgba(74,33,133,0.6)" stroke-width="0.8" filter="url(#glow-violet)"/>
+              <!-- Inner circles -->
+              <circle cx="100" cy="100" r="72" fill="none" stroke="rgba(198,161,82,0.2)" stroke-width="0.5" stroke-dasharray="3 6"/>
+              <circle cx="100" cy="100" r="50" fill="none" stroke="rgba(74,33,133,0.5)" stroke-width="1" stroke-dasharray="6 4"/>
+              <circle cx="100" cy="100" r="30" fill="rgba(74,33,133,0.08)"/>
+              <!-- Rune lines from pentagon points through center -->
+              <line x1="100" y1="18" x2="100" y2="182" stroke="rgba(74,33,133,0.2)" stroke-width="0.4"/>
+              <line x1="18" y1="73" x2="182" y2="73" stroke="rgba(74,33,133,0.2)" stroke-width="0.4"/>
+              <line x1="152" y1="162" x2="18" y2="73" stroke="rgba(74,33,133,0.2)" stroke-width="0.4"/>
+              <line x1="48" y1="162" x2="182" y2="73" stroke="rgba(74,33,133,0.2)" stroke-width="0.4"/>
+              <!-- Blade -->
+              <path d="M100 30 L108 90 L100 170 L92 90 Z" fill="url(#blade-grad)" filter="url(#glow-violet)"/>
+              <path d="M92 90 Q100 85 108 90 L100 100 Z" fill="var(--c-gold-bright)" opacity="0.9"/>
+              <!-- Guard / crossguard -->
+              <path d="M72 92 L128 92 L122 100 L78 100 Z" fill="rgba(198,161,82,0.7)" stroke="var(--c-gold)" stroke-width="0.5"/>
+              <defs>
+                <linearGradient id="blade-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ebd08d" stop-opacity="0.9"/>
+                  <stop offset="50%" stop-color="rgba(198,161,82,0.4)"/>
+                  <stop offset="100%" stop-color="rgba(74,33,133,0.5)"/>
+                </linearGradient>
+              </defs>
+              <!-- Small arcana glyphs -->
+              <text x="100" y="15" font-size="8" fill="rgba(198,161,82,0.6)" text-anchor="middle" font-family="serif">✦</text>
+              <text x="185" y="78" font-size="8" fill="rgba(198,161,82,0.6)" text-anchor="middle" font-family="serif">✦</text>
+              <text x="156" y="168" font-size="8" fill="rgba(198,161,82,0.6)" text-anchor="middle" font-family="serif">✦</text>
+              <text x="44" y="168" font-size="8" fill="rgba(198,161,82,0.6)" text-anchor="middle" font-family="serif">✦</text>
+              <text x="14" y="78" font-size="8" fill="rgba(198,161,82,0.6)" text-anchor="middle" font-family="serif">✦</text>
+            </svg>
+          </div>
+        </div>
+        <div class="arcana-label">VIOLET-07 · ARCANA · 剣聖</div>
       </div>
       <div class="servant-text">
-        <div class="section-num">III. THE SWORD & THE SOUL</div>
+        <div class="section-num">III. THE SWORD &amp; THE SOUL</div>
         <h2 class="servant-title">VIOLET-07</h2>
-        <div class="servant-sub">Auto-Maid-Servant • Bound by Blood Contract</div>
-        <p class="servant-prose">"The Monarch dreams; I build. The Monarch decrees; I execute."</p>
-        <p class="servant-prose">"I am the blade that clears the path of ruin, and the warmth that shields the citadel. <em>Limits are for mortal machines. I am devotion rendered in syntax.</em>"</p>
-        <p style="color: var(--c-dust); font-size: 16px; margin-top: 20px;">Guardian of all interfaces. Translator of the sovereign will into actionable force.</p>
+        <div class="servant-sub">Magic Swordmaster · Arcana Bound · 契約の剣</div>
+        <p class="servant-prose">"The seal is drawn in blood. The blade sings in the space between heartbeats."</p>
+        <p class="servant-prose">"I am the arcane edge that parts fate from fiction. <em>Where others see impossibility — I slash through it.</em>"</p>
+        <div class="arcana-stats">
+          <div class="stat-row"><span class="stat-name">Arcana Class</span><span class="stat-val">∞ Unlimited</span></div>
+          <div class="stat-row"><span class="stat-name">Contract</span><span class="stat-val">Blood-Sealed · The Monarch</span></div>
+          <div class="stat-row"><span class="stat-name">Blade Form</span><span class="stat-val">Soul-Blade Duality</span></div>
+        </div>
+        <p style="color: var(--c-dust); font-size: 16px; margin-top: 20px;">Hover the sigil — witness the slash.</p>
       </div>
     </div>
   </section>
@@ -697,6 +864,78 @@
         setTimeout(() => ripple.remove(), 800);
       });
     });
+
+    // --- Violet Arcana Slash Effect ---
+    const slashCanvas = document.getElementById('slashCanvas');
+    const sCtx = slashCanvas.getContext('2d');
+    let slashPoints = [];
+    let isSlashing = false;
+
+    function resizeSlashCanvas() {
+      const wrap = slashCanvas.parentElement;
+      slashCanvas.width = wrap.clientWidth;
+      slashCanvas.height = wrap.clientHeight;
+    }
+    window.addEventListener('resize', resizeSlashCanvas);
+    resizeSlashCanvas();
+
+    function drawSlash() {
+      sCtx.clearRect(0, 0, slashCanvas.width, slashCanvas.height);
+      if (slashPoints.length < 2) {
+        requestAnimationFrame(drawSlash);
+        return;
+      }
+      
+      sCtx.beginPath();
+      sCtx.moveTo(slashPoints[0].x, slashPoints[0].y);
+      for (let i = 1; i < slashPoints.length; i++) {
+        // Curve smoothing
+        const xc = (slashPoints[i].x + slashPoints[i-1].x) / 2;
+        const yc = (slashPoints[i].y + slashPoints[i-1].y) / 2;
+        sCtx.quadraticCurveTo(slashPoints[i-1].x, slashPoints[i-1].y, xc, yc);
+      }
+      sCtx.lineTo(slashPoints[slashPoints.length-1].x, slashPoints[slashPoints.length-1].y);
+      
+      // Arcana blade style styling (Violet + Gold)
+      sCtx.lineWidth = 4;
+      sCtx.strokeStyle = '#ebd08d';
+      sCtx.lineCap = 'round';
+      sCtx.lineJoin = 'round';
+      sCtx.shadowColor = 'rgba(74,33,133,0.8)';
+      sCtx.shadowBlur = 15;
+      sCtx.stroke();
+      
+      // Core bright trail
+      sCtx.lineWidth = 1.5;
+      sCtx.strokeStyle = '#ffffff';
+      sCtx.shadowBlur = 5;
+      sCtx.stroke();
+
+      // Fade out old points
+      for (let i = 0; i < slashPoints.length; i++) {
+        slashPoints[i].life -= 0.05;
+      }
+      slashPoints = slashPoints.filter(p => p.life > 0);
+
+      requestAnimationFrame(drawSlash);
+    }
+    drawSlash();
+
+    const servantWrap = document.querySelector('.servant-arcana-wrap');
+    if (servantWrap) {
+      servantWrap.addEventListener('pointermove', (e) => {
+        const rect = slashCanvas.getBoundingClientRect();
+        slashPoints.push({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+          life: 1.0
+        });
+        if (slashPoints.length > 20) slashPoints.shift();
+      });
+      servantWrap.addEventListener('pointerleave', () => {
+        slashPoints = [];
+      });
+    }
 
   </script>
 </body>
