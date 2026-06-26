@@ -44,17 +44,10 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
     /* Atmospheric Layers — blending LOTM/Moriarty aesthetic into Monarch */
-        .atmo-lab {
-          position: fixed; inset: 0; z-index: -10;
-          background: url('assets/magic-lab-bg.png') center/cover no-repeat fixed;
-          filter: brightness(0.18) sepia(0.4) hue-rotate(-20deg) saturate(0.6);
-          pointer-events: none;
-        }
         .atmo-kingdom {
           position: fixed; inset: 0; z-index: -9;
           background: url('assets/kingdom-parallax-bg.png') center/cover no-repeat fixed;
-          filter: brightness(0.22) contrast(1.15) hue-rotate(10deg) saturate(0.8);
-          mix-blend-mode: overlay;
+          filter: brightness(0.45) contrast(1.05) saturate(1);
           pointer-events: none;
         }
         .atmo-grain {
@@ -67,7 +60,7 @@
         }
         .atmo-vignette {
           position: fixed; inset: 0; z-index: -4;
-          background: radial-gradient(circle at center, transparent 30%, var(--c-void) 100%);
+          background: radial-gradient(circle at center, transparent 30%, rgba(3,4,7,0.7) 100%);
           pointer-events: none;
         }
 
@@ -75,22 +68,32 @@
         .servant-bg-img {
           position: absolute; inset: 0; z-index: 0;
           background: url('assets/violet-servant-bg.png') center/cover no-repeat;
-          filter: brightness(0.08) saturate(0.5) opacity(0.6);
-          mix-blend-mode: soft-light;
+          filter: brightness(0.45) saturate(1.1);
+          opacity: 0.85;
           pointer-events: none;
         }
         .oracle-bg-img {
           position: absolute; inset: 0; z-index: 0;
-          background: url('assets/celestial-observatory-bg.png') center/cover no-repeat;
-          filter: brightness(0.1) sepia(0.3) hue-rotate(20deg) saturate(0.8);
-          mix-blend-mode: overlay;
+          background: url('assets/celestial-observatory-bg.png') center/cover no-repeat fixed;
+          filter: brightness(0.35) hue-rotate(10deg) saturate(1.2);
           pointer-events: none;
         }
+        .math-pattern-bg {
+          position: absolute; inset: 0; z-index: 1;
+          background: url('assets/math-pattern.svg') center/cover;
+          opacity: 0.35;
+          mix-blend-mode: screen;
+          pointer-events: none;
+          animation: slow-rotate 120s linear infinite;
+        }
+        @keyframes slow-rotate { to { transform: rotate(360deg); } }
+        
         .hero::before {
           content: "";
           position: absolute; inset: 0; z-index: -1;
-          background: url('assets/lotm-fool-card.png') center/cover no-repeat;
-          filter: brightness(0.05) opacity(0.4);
+          background: url('assets/lotm-fool-card.png') center 20%/cover no-repeat fixed;
+          filter: blur(8px) brightness(0.4) saturate(1.2);
+          opacity: 0.8;
           mix-blend-mode: soft-light;
           pointer-events: none;
         }
@@ -109,6 +112,12 @@
       color: var(--c-silver); background: transparent; overflow-x: hidden;
       cursor: none;
       position: relative;
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; z-index: -11;
+      background: radial-gradient(ellipse at 30% 20%, rgba(13,16,32,0.8) 0%, rgba(6,7,16,0.9) 40%, #020307 75%, #000 100%);
+      pointer-events: none;
     }
 
     ::selection { background: var(--c-gold); color: var(--c-void); }
@@ -165,7 +174,7 @@
     section { position: relative; min-height: 100vh; padding: 140px 60px; z-index: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
 
     /* Hero */
-    .hero { align-items: center; text-align: center; background: radial-gradient(circle at center, var(--c-eclipse) 0%, var(--c-void) 70%); }
+    .hero { align-items: center; text-align: center; background: transparent; position: relative; z-index: 1; }
     .parallax-layer { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none; }
     .parallax-dust { position: absolute; inset: -50%; background-image: radial-gradient(rgba(198,161,82,0.1) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.3; }
     .hero-sigil { width: 180px; margin-bottom: 250px; opacity: 0; transform: translateY(30px); animation: hero-rise 1.5s var(--ease-slow) forwards 0.5s; }
@@ -310,13 +319,13 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* Dominion */
-    .dominion { background: linear-gradient(to bottom, var(--c-void), var(--c-abyss)); }
+    .dominion { background: transparent; position: relative; z-index: 1; }
     .section-head { text-align: center; margin-bottom: 80px; position: relative; z-index: 2; }
     .section-num { font-family: var(--font-heading); font-size: 12px; letter-spacing: 0.3em; color: var(--c-gold-dark); margin-bottom: 20px; }
     .section-title { font-family: var(--font-display); font-size: clamp(32px, 4vw, 56px); color: var(--c-gold-bright); }
     
     .dom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-    .dom-card { border: 1px solid rgba(198,161,82,0.1); padding: 50px 40px; background: rgba(7,10,18,0.6); backdrop-filter: blur(5px); transition: transform 0.5s, border-color 0.5s; position: relative; overflow: hidden; }
+    .dom-card { border: 1px solid rgba(198,161,82,0.15); padding: 50px 40px; background: rgba(7,10,18,0.3); backdrop-filter: blur(8px); transition: transform 0.5s, border-color 0.5s; position: relative; overflow: hidden; }
     .dom-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--c-gold), transparent); transform: translateX(-100%); transition: transform 0.8s; }
     .dom-card:hover { transform: translateY(-10px); border-color: rgba(198,161,82,0.3); }
     .dom-card:hover::before { transform: translateX(100%); }
@@ -325,17 +334,24 @@
     .dom-card p { font-size: 18px; color: var(--c-dust); }
 
     /* Approach (Conway) */
-    .approach { background: var(--c-abyss); position: relative; }
+    .approach { background: transparent; position: relative; z-index: 1; }
+    .approach::before {
+      content: "";
+      position: absolute; inset: 0; z-index: 0;
+      background: url('assets/magic-lab-bg.png') center/cover no-repeat fixed;
+      filter: brightness(0.35) saturate(1.1) contrast(1.1);
+      pointer-events: none;
+    }
     .approach-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; text-align: center; }
     .poem-block { font-size: 24px; font-style: italic; color: var(--c-silver); margin-bottom: 40px; }
     .poem-block strong { color: var(--c-gold-bright); font-weight: normal; }
 
     /* Servant Violet */
-    .servant { background: linear-gradient(to bottom, var(--c-abyss), var(--c-void)); display: flex; flex-direction: row; align-items: center; gap: 80px; max-width: 1200px; margin: 0 auto; padding-top: 100px; }
+    .servant { background: transparent; display: flex; flex-direction: row; align-items: center; gap: 80px; max-width: 1200px; margin: 0 auto; padding-top: 100px; position: relative; z-index: 1; }
     .servant-image { flex: 1; position: relative; }
     .servant-image::after { content: ''; position: absolute; inset: -20px; border: 1px dashed rgba(74,33,133,0.3); border-radius: 50%; animation: spin-slow 30s linear infinite; }
     .servant-image svg { width: 100%; max-width: 400px; filter: drop-shadow(0 0 40px rgba(74,33,133,0.3)); }
-    .servant-text { flex: 1; }
+    .servant-text { flex: 1; z-index: 2; }
     .servant-title { font-family: var(--font-display); font-size: 48px; color: var(--c-gold-bright); line-height: 1; margin-bottom: 10px; }
     .servant-sub { font-family: var(--font-heading); font-size: 12px; letter-spacing: 0.3em; color: var(--c-violet); margin-bottom: 40px; text-transform: uppercase; }
     .servant-prose { font-size: 20px; font-style: italic; color: var(--c-silver); margin-bottom: 24px; }
@@ -344,7 +360,7 @@
     @keyframes spin-slow { 100% { transform: rotate(360deg); } }
 
     /* Oracle Tarot */
-    .oracle { background: var(--c-void); text-align: center; }
+    .oracle { background: transparent; text-align: center; position: relative; z-index: 1; }
     .oracle-controls { position: relative; z-index: 2; }
     .oracle-btn {
       font-family: var(--font-heading); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
@@ -372,7 +388,7 @@
     .oracle-msg.show { opacity: 1; }
 
     /* Footer */
-    footer { padding: 60px; text-align: center; background: var(--c-void); border-top: 1px solid rgba(198,161,82,0.1); }
+    footer { padding: 60px; text-align: center; background: rgba(3,4,7,0.8); border-top: 1px solid rgba(198,161,82,0.1); position: relative; z-index: 2; }
     .footer-mark { font-family: var(--font-heading); font-size: 24px; color: var(--c-gold-dark); margin-bottom: 20px; }
     .footer-text { font-size: 14px; font-style: italic; color: var(--c-dust); }
 
@@ -398,7 +414,6 @@
 <body>
 
   <!-- Atmospheric Layers (LOTM/Moriarty blend) -->
-  <div class="atmo-lab"></div>
   <div class="atmo-kingdom"></div>
   <div class="atmo-grain"></div>
   <div class="atmo-vignette"></div>
@@ -449,6 +464,7 @@
 
   <!-- Section: Dominion -->
   <section class="dominion" id="dominion">
+    <div class="math-pattern-bg" aria-hidden="true"></div>
     <div class="section-head reveal">
       <div class="section-num">I. DOMINION</div>
       <h2 class="section-title">The Law of the Realm</h2>
@@ -489,7 +505,10 @@
 
   <!-- Section: Servant -->
   <section id="servant" style="position:relative; overflow:hidden;">
-    <div class="servant-bg-img" aria-hidden="true"></div>
+    <div class="servant-bg-img" aria-hidden="true" style="opacity: 1; filter: brightness(0.5) saturate(0.8) hue-rotate(15deg); mix-blend-mode: normal;"></div>
+    <div style="position:absolute; right: -5%; bottom: -10%; opacity: 0.15; pointer-events:none; z-index: 1;">
+      <img src="assets/sword-art-crest.png" alt="Sword Crest" style="width: 800px; transform: rotate(-15deg);">
+    </div>
     <div class="servant reveal">
       <div class="servant-arcana-wrap">
         <canvas id="slashCanvas" class="slash-canvas" aria-hidden="true"></canvas>
@@ -557,7 +576,8 @@
 
   <!-- Section: Tarot Oracle -->
   <section class="oracle" id="oracle" style="position:relative; overflow:hidden;">
-    <div class="oracle-bg-img" aria-hidden="true"></div>
+    <div class="oracle-bg-img" aria-hidden="true" style="opacity: 1; filter: brightness(0.35) hue-rotate(10deg) saturate(1.2);"></div>
+    <div class="math-pattern-bg" aria-hidden="true" style="opacity: 0.08;"></div>
     <div class="reveal">
       <div class="section-num">IV. THE FATE WE FORGE</div>
       <h2 class="section-title">Draw From the Void</h2>
