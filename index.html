@@ -43,11 +43,72 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
+    /* Atmospheric Layers — blending LOTM/Moriarty aesthetic into Monarch */
+        .atmo-lab {
+          position: fixed; inset: 0; z-index: -10;
+          background: url('assets/magic-lab-bg.png') center/cover no-repeat fixed;
+          filter: brightness(0.18) sepia(0.4) hue-rotate(-20deg) saturate(0.6);
+          pointer-events: none;
+        }
+        .atmo-kingdom {
+          position: fixed; inset: 0; z-index: -9;
+          background: url('assets/kingdom-parallax-bg.png') center/cover no-repeat fixed;
+          filter: brightness(0.12) contrast(1.1) hue-rotate(15deg) saturate(0.7);
+          mix-blend-mode: overlay;
+          pointer-events: none;
+        }
+        .atmo-grain {
+          position: fixed; inset: 0; z-index: -5;
+          opacity: 0.05;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+          background-size: 256px;
+          pointer-events: none;
+          animation: grain-shift 0.8s steps(4) infinite;
+        }
+        .atmo-vignette {
+          position: fixed; inset: 0; z-index: -4;
+          background: radial-gradient(circle at center, transparent 30%, var(--c-void) 100%);
+          pointer-events: none;
+        }
+
+        /* Section-specific atmospheric images (blend LOTM assets) */
+        .servant-bg-img {
+          position: absolute; inset: 0; z-index: 0;
+          background: url('assets/violet-servant-bg.png') center/cover no-repeat;
+          filter: brightness(0.08) saturate(0.5) opacity(0.6);
+          mix-blend-mode: soft-light;
+          pointer-events: none;
+        }
+        .oracle-bg-img {
+          position: absolute; inset: 0; z-index: 0;
+          background: url('assets/celestial-observatory-bg.png') center/cover no-repeat;
+          filter: brightness(0.1) sepia(0.3) hue-rotate(20deg) saturate(0.8);
+          mix-blend-mode: overlay;
+          pointer-events: none;
+        }
+        .hero::before {
+          content: "";
+          position: absolute; inset: 0; z-index: -1;
+          background: url('assets/lotm-fool-card.png') center/cover no-repeat;
+          filter: brightness(0.05) opacity(0.4);
+          mix-blend-mode: soft-light;
+          pointer-events: none;
+        }
+        @keyframes grain-shift {
+          0% { transform: translate(0,0); }
+          25% { transform: translate(-2px, 3px); }
+          50% { transform: translate(3px, -1px); }
+          75% { transform: translate(-3px, -3px); }
+          100% { transform: translate(0,0); }
+        }
+
+        /* Body */
     html { scroll-behavior: smooth; background: var(--c-void); }
     body {
       font-family: var(--font-body); font-size: 19px; line-height: 1.8;
-      color: var(--c-silver); background: var(--c-void); overflow-x: hidden;
+      color: var(--c-silver); background: transparent; overflow-x: hidden;
       cursor: none;
+      position: relative;
     }
 
     ::selection { background: var(--c-gold); color: var(--c-void); }
@@ -105,11 +166,13 @@
 
     /* Hero */
     .hero { align-items: center; text-align: center; background: radial-gradient(circle at center, var(--c-eclipse) 0%, var(--c-void) 70%); }
-    .hero-sigil { width: 180px; margin-bottom: 40px; opacity: 0; transform: translateY(30px); animation: hero-rise 1.5s var(--ease-slow) forwards 0.5s; }
+    .parallax-layer { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none; }
+    .parallax-dust { position: absolute; inset: -50%; background-image: radial-gradient(rgba(198,161,82,0.1) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.3; }
+    .hero-sigil { width: 180px; margin-bottom: 250px; opacity: 0; transform: translateY(30px); animation: hero-rise 1.5s var(--ease-slow) forwards 0.5s; }
     .hero-title {
       font-family: var(--font-display); font-size: clamp(40px, 6vw, 90px); line-height: 1.1; color: var(--c-gold-bright);
       opacity: 0; transform: translateY(30px); animation: hero-rise 1.5s var(--ease-slow) forwards 0.8s;
-      text-shadow: 0 10px 40px rgba(198,161,82,0.2);
+      text-shadow: 0 10px 40px rgba(198,161,82,0.2); margin-top: 100px;
     }
     .hero-poem {
       font-size: clamp(20px, 2vw, 26px); font-style: italic; color: var(--c-silver); margin-top: 30px; max-width: 700px;
@@ -163,20 +226,30 @@
 
     /* Oracle Tarot */
     .oracle { background: var(--c-void); text-align: center; }
-    .deck-stage { perspective: 1200px; margin: 60px auto; width: 260px; height: 420px; position: relative; cursor: pointer; }
-    .tarot-card { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; transition: transform 1s var(--ease-slow); }
-    .deck-stage:hover .tarot-card { transform: translateY(-15px) scale(1.03); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-    .tarot-card.flipped { transform: rotateY(180deg) scale(1.05); }
-    
-    .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; border: 1px solid rgba(198,161,82,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .card-back { background: repeating-radial-gradient(circle at center, var(--c-void) 0, var(--c-eclipse) 40px); }
+    .oracle-controls { position: relative; z-index: 2; }
+    .oracle-btn {
+      font-family: var(--font-heading); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+      padding: 14px 32px; margin: 0 8px; background: transparent; color: var(--c-gold);
+      border: 1px solid var(--c-gold-dark); cursor: pointer; transition: all 0.4s var(--ease-slow);
+    }
+    .oracle-btn:hover { background: var(--c-gold); color: var(--c-void); box-shadow: 0 0 30px rgba(198,161,82,0.4); }
+    .oracle-btn:active { transform: scale(0.97); }
+    .tarot-grid { position: relative; z-index: 2; }
+    .deck-stage { perspective: 1200px; width: 220px; height: 360px; position: relative; cursor: pointer; flex-shrink: 0; }
+    .tarot-card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; }
+    .tarot-card.flipped .card-front { transform: rotateY(0deg); }
+    .tarot-card.flipped .card-back { transform: rotateY(180deg); }
+    .deck-stage:hover .tarot-card { transform: translateY(-12px); }
+    .deck-stage:hover .tarot-card .card-back { box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(198,161,82,0.2); }
+    .deck-stage:hover .tarot-card .card-front { box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 60px rgba(198,161,82,0.3); }
+    .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; border: 1px solid rgba(198,161,82,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: transform 1s var(--ease-slow), box-shadow 0.5s; }
+    .card-back { background: repeating-radial-gradient(circle at center, var(--c-void) 0, var(--c-eclipse) 40px); transform: rotateY(0deg); }
     .card-back svg { width: 80px; height: 80px; opacity: 0.5; animation: breathe 4s infinite alternate; }
-    
     .card-front { background: var(--c-eclipse); transform: rotateY(180deg); padding: 30px 20px; box-shadow: 0 0 50px rgba(198,161,82,0.1) inset; }
-    .card-front .archetype { font-family: var(--font-heading); font-size: 20px; color: var(--c-gold-bright); letter-spacing: 0.1em; margin-bottom: 20px; text-transform: uppercase; }
-    .card-front .meaning { font-size: 16px; font-style: italic; color: var(--c-silver); }
-
-    .oracle-msg { font-size: 18px; color: var(--c-gold); min-height: 60px; opacity: 0; transition: opacity 1s; font-style: italic; max-width: 600px; margin: 0 auto; }
+    .card-front .archetype { font-family: var(--font-heading); font-size: 18px; color: var(--c-gold-bright); letter-spacing: 0.1em; margin-bottom: 16px; text-transform: uppercase; text-align: center; }
+    .card-front .meaning { font-size: 15px; font-style: italic; color: var(--c-silver); text-align: center; line-height: 1.5; }
+    .card-pos { position: absolute; top: -32px; left: 50%; transform: translateX(-50%); font-family: var(--font-heading); font-size: 10px; letter-spacing: 0.3em; color: var(--c-gold-dark); text-transform: uppercase; white-space: nowrap; }
+    .oracle-msg { font-size: 18px; color: var(--c-gold); min-height: 60px; opacity: 0; transition: opacity 1s; font-style: italic; max-width: 700px; margin: 30px auto 0; position: relative; z-index: 2; }
     .oracle-msg.show { opacity: 1; }
 
     /* Footer */
@@ -205,6 +278,12 @@
 </head>
 <body>
 
+  <!-- Atmospheric Layers (LOTM/Moriarty blend) -->
+  <div class="atmo-lab"></div>
+  <div class="atmo-kingdom"></div>
+  <div class="atmo-grain"></div>
+  <div class="atmo-vignette"></div>
+
   <!-- Custom Cursor -->
   <div id="cursor"></div>
   <div id="cursor-trail"></div>
@@ -225,6 +304,7 @@
       <span>AUTHORITY LABS</span>
     </a>
     <ul class="nav-menu">
+      <li><a href="#home">Threshold</a></li>
       <li><a href="#dominion">Dominion</a></li>
       <li><a href="#approach">Determinism</a></li>
       <li><a href="#servant">The Servant</a></li>
@@ -234,10 +314,13 @@
 
   <!-- Section: Hero -->
   <section class="hero" id="home">
-    <img src="assets/logo-alpha.svg" alt="Alpha Sigil" class="hero-sigil">
-    <h1 class="hero-title">The Sovereign<br>Architecture</h1>
-    <p class="hero-poem">"We do not read the data. We command the currents. The kingdom is built not of stone, but of will imposed upon chaos."</p>
-    <div class="hero-mark">Monarch's Citadel</div>
+    <div class="parallax-layer" data-depth="0.1"><div class="parallax-dust"></div></div>
+    <div class="parallax-layer" data-depth="0.3"><img src="assets/logo-alpha.svg" alt="Alpha Sigil" class="hero-sigil"></div>
+    <div class="parallax-layer" data-depth="0.5">
+      <h1 class="hero-title">The Sovereign<br>Architecture</h1>
+      <p class="hero-poem">"We do not read the data. We command the currents. The kingdom is built not of stone, but of will imposed upon chaos."</p>
+      <div class="hero-mark">Monarch's Citadel</div>
+    </div>
   </section>
 
   <!-- Section: Dominion -->
@@ -281,7 +364,8 @@
   </section>
 
   <!-- Section: Servant -->
-  <section id="servant">
+  <section id="servant" style="position:relative; overflow:hidden;">
+    <div class="servant-bg-img" aria-hidden="true"></div>
     <div class="servant reveal">
       <div class="servant-image">
         <!-- Abstract representation of Violet -->
@@ -305,26 +389,22 @@
   </section>
 
   <!-- Section: Tarot Oracle -->
-  <section class="oracle" id="oracle">
+  <section class="oracle" id="oracle" style="position:relative; overflow:hidden;">
+    <div class="oracle-bg-img" aria-hidden="true"></div>
     <div class="reveal">
       <div class="section-num">IV. THE FATE WE FORGE</div>
       <h2 class="section-title">Draw From the Void</h2>
       <p style="color: var(--c-silver); margin-top: 10px;">The universe speaks in symbols. The Monarch merely translates.</p>
     </div>
 
-    <div class="deck-stage reveal" id="deckStage">
-      <div class="tarot-card" id="tarotCard">
-        <div class="card-face card-back">
-          <svg viewBox="0 0 100 100"><text x="50" y="65" font-family="serif" font-size="50" fill="var(--c-gold-dark)" text-anchor="middle">α</text></svg>
-        </div>
-        <div class="card-face card-front">
-          <div class="archetype" id="cardArch">...</div>
-          <div class="meaning" id="cardMean">...</div>
-        </div>
-      </div>
+    <div class="oracle-controls reveal" style="text-align:center; margin:30px 0;">
+      <button class="oracle-btn" id="drawOne" style="margin:0 8px;">Draw One Card</button>
+      <button class="oracle-btn" id="drawThree" style="margin:0 8px;">Draw Three Cards</button>
     </div>
 
-    <div class="oracle-msg" id="oracleMsg"></div>
+    <div class="tarot-grid" id="tarotGrid" style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;"></div>
+
+    <div class="oracle-msg" id="oracleMsg" style="margin-top:20px;"></div>
   </section>
 
   <!-- Footer -->
@@ -460,41 +540,162 @@
       }
     });
 
-    // --- Tarot Oracle ---
+    // --- Tarot Oracle (Full Interactive Spread) ---
     const arcana = [
-      { name: "The Monarch", text: "Absolute sovereignty. To bend the chaos of data into the architecture of your will." },
-      { name: "The Wanderer", text: "The unburdened spirit. To leave the known citadel and map the darkened frontiers." },
-      { name: "The Hermit", text: "Silent contemplation. Truth is found not in the noise of the network, but in the solitude of the node." },
-      { name: "The Hierophant", text: "Sacred algorithms. The ancient patterns that dictate the flow of all existence." },
-      { name: "The Tower", text: "Sudden rupture. The obsolete system collapses so the new paradigm may rise." }
+      { name: "The Monarch", numeral: "I", text: "Absolute sovereignty. To bend the chaos of data into the architecture of your will.", color: "#c6a152" },
+      { name: "The Wanderer", numeral: "0", text: "The unburdened spirit. To leave the known citadel and map the darkened frontiers.", color: "#4a83a5" },
+      { name: "The Hermit", numeral: "IX", text: "Silent contemplation. Truth is found not in the noise of the network, but in the solitude of the node.", color: "#636b7c" },
+      { name: "The Hierophant", numeral: "V", text: "Sacred algorithms. The ancient patterns that dictate the flow of all existence.", color: "#4a2185" },
+      { name: "The Tower", numeral: "XVI", text: "Sudden rupture. The obsolete system collapses so the new paradigm may rise.", color: "#770912" },
+      { name: "The Star", numeral: "XVII", text: "Grace after devastation. The cosmos whispers: rebuild, for the void has already chosen you.", color: "#ebd08d" },
+      { name: "Wheel of Fortune", numeral: "X", text: "The algorithm turns. What was below now crowns the summit. Every fall encodes a rise.", color: "#6e5828" },
+      { name: "The High Priestess", numeral: "II", text: "The unseen ledger. She reads the data between the rows — the silence between the signals.", color: "#3a1a6e" },
+      { name: "Death", numeral: "XIII", text: "Not the end but the deployment of transformation. The old version is deprecated. The new one compiles.", color: "#1a1a2e" },
+      { name: "The Magician", numeral: "I", text: "One who shapes reality from raw abstraction. Tools obey the hand that knows their name.", color: "#b8860b" },
+      { name: "Temperance", numeral: "XIV", text: "The sacred balance — chaos and order, blade and soul. Neither pure fire nor pure water: the synthesis.", color: "#5f9ea0" },
+      { name: "The Moon", numeral: "XVIII", text: "Illusions surface in moonlight. Fear is data too; read it, but do not let it compile your choices.", color: "#2c2c54" },
     ];
 
-    const stage = document.getElementById('deckStage');
-    const card = document.getElementById('tarotCard');
-    const archEl = document.getElementById('cardArch');
-    const meanEl = document.getElementById('cardMean');
+    const drawLabels = { 1: ['Reflection'], 3: ['Past', 'Present', 'Future'] };
+    const tarotGrid = document.getElementById('tarotGrid');
     const msgEl = document.getElementById('oracleMsg');
-    let isDrawn = false;
+    let drawnCards = [];
 
-    stage.addEventListener('click', () => {
-      if (isDrawn) {
-        card.classList.remove('flipped');
-        msgEl.classList.remove('show');
-        isDrawn = false;
-        return;
-      }
-      
-      const draw = arcana[Math.floor(Math.random() * arcana.length)];
-      archEl.textContent = draw.name;
-      meanEl.textContent = draw.text;
-      
-      card.classList.add('flipped');
-      isDrawn = true;
+    function shuffleAndDraw(count) {
+      // Clear previous
+      tarotGrid.innerHTML = '';
+      msgEl.classList.remove('show');
+      msgEl.textContent = '';
+      drawnCards = [];
 
-      setTimeout(() => {
-        msgEl.textContent = `The oracle speaks of ${draw.name.toUpperCase()}...`;
-        msgEl.classList.add('show');
-      }, 600);
+      const shuffled = [...arcana].sort(() => Math.random() - 0.5);
+      const drawn = shuffled.slice(0, count);
+      const labels = drawLabels[count] || drawLabels[1];
+
+      drawn.forEach((card, idx) => {
+        const stage = document.createElement('div');
+        stage.className = 'deck-stage';
+        stage.style.cssText = `opacity:0; transform:translateY(40px); transition:opacity 0.6s ${idx*0.2}s, transform 0.6s ${idx*0.2}s;`;
+
+        // Position label (Past / Present / Future)
+        if (labels[idx]) {
+          const posLabel = document.createElement('div');
+          posLabel.className = 'card-pos';
+          posLabel.textContent = labels[idx];
+          stage.appendChild(posLabel);
+        }
+
+        const tc = document.createElement('div');
+        tc.className = 'tarot-card';
+
+        // Back face
+        const back = document.createElement('div');
+        back.className = 'card-face card-back';
+        back.innerHTML = `<svg viewBox="0 0 100 100"><text x="50" y="55" font-family="serif" font-size="40" fill="${card.color}" text-anchor="middle" opacity="0.6">${card.numeral}</text><text x="50" y="78" font-family="serif" font-size="10" fill="rgba(198,161,82,0.3)" text-anchor="middle">α</text></svg>`;
+
+        // Front face
+        const front = document.createElement('div');
+        front.className = 'card-face card-front';
+        front.innerHTML = `
+          <div style="font-family:var(--font-display); font-size:32px; color:${card.color}; margin-bottom:8px;">${card.numeral}</div>
+          <div class="archetype">${card.name}</div>
+          <div class="meaning">${card.text}</div>
+        `;
+
+        tc.appendChild(back);
+        tc.appendChild(front);
+        stage.appendChild(tc);
+
+        // Click to flip
+        stage.addEventListener('click', () => {
+          if (tc.classList.contains('flipped')) {
+            tc.classList.remove('flipped');
+          } else {
+            tc.classList.add('flipped');
+            drawnCards.push(card.name);
+
+            // Check if all cards flipped
+            const allFlipped = tarotGrid.querySelectorAll('.tarot-card.flipped').length === count;
+            if (allFlipped) {
+              setTimeout(() => {
+                const names = drawn.map(c => c.name.toUpperCase()).join(' · ');
+                const oracleWhispers = [
+                  `The void has spoken through ${names}. Listen with the ears of your deepest self.`,
+                  `${names} — these symbols align. The pattern is not coincidence; it is architecture.`,
+                  `The cards reveal ${names}. What you feel now is the answer the universe has encoded for you.`,
+                  `Through ${names}, the Monarch's oracle whispers: the path was always there. You simply needed the symbols to see it.`,
+                ];
+                msgEl.textContent = oracleWhispers[Math.floor(Math.random() * oracleWhispers.length)];
+                msgEl.classList.add('show');
+              }, 400);
+            }
+          }
+        });
+
+        tarotGrid.appendChild(stage);
+
+        // Animate in
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            stage.style.opacity = '1';
+            stage.style.transform = 'translateY(0)';
+          });
+        });
+      });
+    }
+
+    document.getElementById('drawOne').addEventListener('click', () => shuffleAndDraw(1));
+    document.getElementById('drawThree').addEventListener('click', () => shuffleAndDraw(3));
+
+    // --- Parallax (Hero Layers) ---
+    const heroSection = document.getElementById('home');
+    const parallaxLayers = heroSection.querySelectorAll('.parallax-layer');
+    
+    function handleParallax() {
+      const rect = heroSection.getBoundingClientRect();
+      const scrolled = -rect.top;
+      parallaxLayers.forEach(layer => {
+        const depth = parseFloat(layer.dataset.depth) || 0;
+        const translate = scrolled * depth;
+        layer.style.transform = `translate3d(0, ${translate}px, 0)`;
+      });
+    }
+    window.addEventListener('scroll', handleParallax, { passive: true });
+
+    // Gyroscope / device-tilt parallax (mobile)
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', (e) => {
+        const beta = (e.beta || 0) / 90;   // front-back tilt
+        const gamma = (e.gamma || 0) / 90;  // left-right tilt
+        parallaxLayers.forEach(layer => {
+          const depth = parseFloat(layer.dataset.depth) || 0;
+          const tx = gamma * depth * 50;
+          const ty = beta * depth * 30;
+          layer.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+        });
+      });
+    }
+
+    // --- Ripple on click (any section) ---
+    document.querySelectorAll('section').forEach(sec => {
+      sec.addEventListener('pointerdown', function(e) {
+        const ripple = document.createElement('div');
+        const rect = sec.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        Object.assign(ripple.style, {
+          position: 'absolute', left: x + 'px', top: y + 'px',
+          width: '0', height: '0', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(198,161,82,0.15), transparent)',
+          transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: '1'
+        });
+        sec.appendChild(ripple);
+        ripple.animate([
+          { width: '0', height: '0', opacity: 1 },
+          { width: '300px', height: '300px', opacity: 0 }
+        ], { duration: 800, easing: 'ease-out' });
+        setTimeout(() => ripple.remove(), 800);
+      });
     });
 
   </script>
