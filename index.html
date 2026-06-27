@@ -681,7 +681,7 @@
       <div class="dom-card reveal">
         <svg class="dom-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         <h3>Universal Convergence</h3>
-        <p>Countless channels — Telegram, Discord, physical hardware. Yet they all collapse into a singularity. The Monarch speaks one truth, and reality aligns.</p>
+        <p>Myriad streams of resonance — whispers in the ether, pulses through the unseen veil, echoes bound in iron and light. Yet they all collapse into a singularity. The Monarch speaks one truth, and reality aligns.</p>
       </div>
       <div class="dom-card reveal">
         <svg class="dom-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
@@ -953,20 +953,98 @@
       }
     });
 
-    // --- Tarot Oracle (Full Interactive Spread) ---
+    // --- Tarot Oracle (Full 78-Card Deck) ---
+    // Fisher-Yates shuffle using crypto.getRandomValues for true randomness
+    function cryptoShuffle(arr) {
+      const a = [...arr];
+      const buf = new Uint32Array(a.length);
+      crypto.getRandomValues(buf);
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = buf[i] % (i + 1);
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
     const arcana = [
-      { name: "The Monarch", numeral: "I", text: "Absolute sovereignty. To bend the chaos of data into the architecture of your will.", color: "#c6a152" },
-      { name: "The Wanderer", numeral: "0", text: "The unburdened spirit. To leave the known citadel and map the darkened frontiers.", color: "#4a83a5" },
-      { name: "The Hermit", numeral: "IX", text: "Silent contemplation. Truth is found not in the noise of the network, but in the solitude of the node.", color: "#636b7c" },
-      { name: "The Hierophant", numeral: "V", text: "Sacred algorithms. The ancient patterns that dictate the flow of all existence.", color: "#4a2185" },
-      { name: "The Tower", numeral: "XVI", text: "Sudden rupture. The obsolete system collapses so the new paradigm may rise.", color: "#770912" },
-      { name: "The Star", numeral: "XVII", text: "Grace after devastation. The cosmos whispers: rebuild, for the void has already chosen you.", color: "#ebd08d" },
-      { name: "Wheel of Fortune", numeral: "X", text: "The algorithm turns. What was below now crowns the summit. Every fall encodes a rise.", color: "#6e5828" },
+      { name: "The Fool", numeral: "0", text: "The unburdened spirit. To step into the void with absolute trust that the path will form beneath your feet.", color: "#4a83a5" },
+      { name: "The Magician", numeral: "I", text: "One who shapes reality from raw abstraction. Tools obey the hand that knows their true name.", color: "#b8860b" },
       { name: "The High Priestess", numeral: "II", text: "The unseen ledger. She reads the data between the rows — the silence between the signals.", color: "#3a1a6e" },
-      { name: "Death", numeral: "XIII", text: "Not the end but the deployment of transformation. The old version is deprecated. The new one compiles.", color: "#1a1a2e" },
-      { name: "The Magician", numeral: "I", text: "One who shapes reality from raw abstraction. Tools obey the hand that knows their name.", color: "#b8860b" },
+      { name: "The Empress", numeral: "III", text: "The mother of genesis. Abundant creation unfurling from the chaotic wellspring of thought.", color: "#2c6e49" },
+      { name: "The Emperor", numeral: "IV", text: "Absolute sovereignty. To bend the chaos of variables into the architecture of your will.", color: "#8b0000" },
+      { name: "The Hierophant", numeral: "V", text: "Sacred algorithms. The ancient patterns that dictate the flow of all existence.", color: "#4a2185" },
+      { name: "The Lovers", numeral: "VI", text: "The sublime intersection. Two disparate truths aligning to form a profound singularity.", color: "#e07a5f" },
+      { name: "The Chariot", numeral: "VII", text: "Triumphant momentum. Harnessing opposing forces to accelerate through the fabric of fate.", color: "#9e2a2b" },
+      { name: "Strength", numeral: "VIII", text: "Gentle dominance. Taming the untamable not with force, but with the quiet resonance of the soul.", color: "#e36414" },
+      { name: "The Hermit", numeral: "IX", text: "Silent contemplation. Truth is found not in the noise of the network, but in the solitude of the node.", color: "#636b7c" },
+      { name: "Wheel of Fortune", numeral: "X", text: "The algorithm turns. What was below now crowns the summit. Every fall encodes a rise.", color: "#6e5828" },
+      { name: "Justice", numeral: "XI", text: "The grand equalizer. Every action leaves a cryptographic trace; karma compiles perfectly.", color: "#8c7851" },
+      { name: "The Hanged Man", numeral: "XII", text: "Suspended animation. To surrender control is to gain the vision others are too frantic to see.", color: "#5b8c85" },
+      { name: "Death", numeral: "XIII", text: "Not the end, but the deployment of transformation. The old version is deprecated so the new one may compile.", color: "#1a1a2e" },
       { name: "Temperance", numeral: "XIV", text: "The sacred balance — chaos and order, blade and soul. Neither pure fire nor pure water: the synthesis.", color: "#5f9ea0" },
+      { name: "The Devil", numeral: "XV", text: "The chains we forge ourselves. An illusion of entrapment written in a language we have the key to decipher.", color: "#3b0918" },
+      { name: "The Tower", numeral: "XVI", text: "Sudden rupture. The obsolete system collapses violently so the new paradigm may rise.", color: "#770912" },
+      { name: "The Star", numeral: "XVII", text: "Grace after devastation. The cosmos whispers: rebuild, for the void has already chosen you.", color: "#ebd08d" },
       { name: "The Moon", numeral: "XVIII", text: "Illusions surface in moonlight. Fear is data too; read it, but do not let it compile your choices.", color: "#2c2c54" },
+      { name: "The Sun", numeral: "XIX", text: "Radiant clarity. The shadows dissipate when exposed to the undeniable brilliance of truth.", color: "#ffb703" },
+      { name: "Judgement", numeral: "XX", text: "The ultimate audit. The past is reconciled, and the spirit awakens to its higher directive.", color: "#a2d2ff" },
+      { name: "The World", numeral: "XXI", text: "The completed cycle. The architecture is finished, perfect and dancing in the ether.", color: "#1d3557" },
+      { name: "Ace of Wands", numeral: "I", text: "The pure potential of creative fire and raw intent — a spark awaiting its wielder.", color: "#c1121f" },
+      { name: "Two of Wands", numeral: "II", text: "The delicate balance of creative fire. Two paths shimmer before you; one leads beyond the horizon.", color: "#c1121f" },
+      { name: "Three of Wands", numeral: "III", text: "The collaborative growth of creative fire. The fleet has sailed; now watch the horizon for its return.", color: "#c1121f" },
+      { name: "Four of Wands", numeral: "IV", text: "The stable foundation of creative fire. Celebrate what has been built before the next siege begins.", color: "#c1121f" },
+      { name: "Five of Wands", numeral: "V", text: "The disruptive challenge within creative fire. Competition and chaos, the forge that sharpens the edge.", color: "#c1121f" },
+      { name: "Six of Wands", numeral: "VI", text: "The harmonious restoration of creative fire. Victory is not the destination but the signal to push further.", color: "#c1121f" },
+      { name: "Seven of Wands", numeral: "VII", text: "The strategic defense of creative fire. Stand your ground; the summit is worth the assault.", color: "#c1121f" },
+      { name: "Eight of Wands", numeral: "VIII", text: "The rapid acceleration of creative fire. Messages, decisions, and movements converge in a single burst.", color: "#c1121f" },
+      { name: "Nine of Wands", numeral: "IX", text: "The nearing culmination of creative fire. Battle-worn but unbroken; one final threshold remains.", color: "#c1121f" },
+      { name: "Ten of Wands", numeral: "X", text: "The absolute fulfillment of creative fire. The weight of all you have built now rests on your shoulders.", color: "#c1121f" },
+      { name: "Page of Wands", numeral: "Page", text: "The youthful spark of creative fire — a messenger arriving with news that sets the world alight.", color: "#c1121f" },
+      { name: "Knight of Wands", numeral: "Knight", text: "The dynamic pursuit of creative fire. Charging forward before the strategy is fully formed.", color: "#c1121f" },
+      { name: "Queen of Wands", numeral: "Queen", text: "The intuitive mastery of creative fire. Charisma and will — she bends the room before she speaks.", color: "#c1121f" },
+      { name: "King of Wands", numeral: "King", text: "The sovereign command of creative fire. Vision made manifest through sheer force of character.", color: "#c1121f" },
+      { name: "Ace of Cups", numeral: "I", text: "The pure potential of emotional resonance — a chalice brimming with uncharted feeling.", color: "#0077b6" },
+      { name: "Two of Cups", numeral: "II", text: "The delicate balance of emotional resonance. A bond formed in the space between two silences.", color: "#0077b6" },
+      { name: "Three of Cups", numeral: "III", text: "The collaborative growth of deep intuition. Joy amplified when refracted through other souls.", color: "#0077b6" },
+      { name: "Four of Cups", numeral: "IV", text: "The stable foundation of emotional resonance, turned inward. What is being offered that you refuse to see?", color: "#0077b6" },
+      { name: "Five of Cups", numeral: "V", text: "The disruptive challenge within deep intuition. Three cups spill, but two remain standing behind you.", color: "#0077b6" },
+      { name: "Six of Cups", numeral: "VI", text: "The harmonious restoration of emotional resonance. A memory surfaces, carrying the scent of what was lost.", color: "#0077b6" },
+      { name: "Seven of Cups", numeral: "VII", text: "The strategic defense of deep intuition. The mind conjures endless possibilities; most are illusions.", color: "#0077b6" },
+      { name: "Eight of Cups", numeral: "VIII", text: "The rapid acceleration of emotional resonance, directed away. To leave what no longer serves is not failure.", color: "#0077b6" },
+      { name: "Nine of Cups", numeral: "IX", text: "The nearing culmination of deep intuition. The wish fulfilled — sit with it before demanding more.", color: "#0077b6" },
+      { name: "Ten of Cups", numeral: "X", text: "The absolute fulfillment of emotional resonance. The heart's architecture, complete and luminous.", color: "#0077b6" },
+      { name: "Page of Cups", numeral: "Page", text: "The youthful spark of deep intuition. A fish leaps from the chalice — the unexpected message.", color: "#0077b6" },
+      { name: "Knight of Cups", numeral: "Knight", text: "The dynamic pursuit of emotional resonance. He arrives on a calm horse, bearing dreams and proposals.", color: "#0077b6" },
+      { name: "Queen of Cups", numeral: "Queen", text: "The intuitive mastery of deep intuition. She reads the current beneath the current.", color: "#0077b6" },
+      { name: "King of Cups", numeral: "King", text: "The sovereign command of emotional resonance. Authority held without hardness; power without cruelty.", color: "#0077b6" },
+      { name: "Ace of Swords", numeral: "I", text: "The pure potential of intellectual clarity — a blade emerging from cloud, cutting through all pretense.", color: "#788585" },
+      { name: "Two of Swords", numeral: "II", text: "The delicate balance of intellectual clarity. Blindfolded at the crossroads, each blade poised to choose.", color: "#788585" },
+      { name: "Three of Swords", numeral: "III", text: "The collaborative growth of reason, interrupted. Grief is not the end; it is data the heart must process.", color: "#788585" },
+      { name: "Four of Swords", numeral: "IV", text: "The stable foundation of intellectual clarity. Rest. Even the sword requires the stillness of the scabbard.", color: "#788585" },
+      { name: "Five of Swords", numeral: "V", text: "The disruptive challenge within reason. A victory with too high a price. Know what you have actually won.", color: "#788585" },
+      { name: "Six of Swords", numeral: "VI", text: "The harmonious restoration of intellectual clarity. The crossing is rough, but calmer waters await ahead.", color: "#788585" },
+      { name: "Seven of Swords", numeral: "VII", text: "The strategic defense of reason. A mind operating alone, carrying what should have been shared.", color: "#788585" },
+      { name: "Eight of Swords", numeral: "VIII", text: "The rapid acceleration of intellectual clarity. The blindfold is self-imposed; the bindings, loose.", color: "#788585" },
+      { name: "Nine of Swords", numeral: "IX", text: "The nearing culmination of reason, turned inward. 3 AM thoughts that feel permanent but are not.", color: "#788585" },
+      { name: "Ten of Swords", numeral: "X", text: "The absolute fulfillment of intellectual clarity, in defeat. Rock bottom is also solid ground.", color: "#788585" },
+      { name: "Page of Swords", numeral: "Page", text: "The youthful spark of intellectual clarity. Quick eyes, quick tongue — still learning when to sheathe.", color: "#788585" },
+      { name: "Knight of Swords", numeral: "Knight", text: "The dynamic pursuit of intellectual clarity. Charging at full speed; brilliant, reckless, unstoppable.", color: "#788585" },
+      { name: "Queen of Swords", numeral: "Queen", text: "The intuitive mastery of intellectual clarity. She has known loss, and from it forged a precision most fear.", color: "#788585" },
+      { name: "King of Swords", numeral: "King", text: "The sovereign command of intellectual clarity. Judgment without sentiment; truth without apology.", color: "#788585" },
+      { name: "Ace of Pentacles", numeral: "I", text: "The pure potential of material manifestation — a coin held out by an unseen hand from the clouds.", color: "#2a9d8f" },
+      { name: "Two of Pentacles", numeral: "II", text: "The delicate balance of grounded reality. Two worlds spinning; manage them or be consumed by both.", color: "#2a9d8f" },
+      { name: "Three of Pentacles", numeral: "III", text: "The collaborative growth of material manifestation. Mastery acknowledged by those who know what they see.", color: "#2a9d8f" },
+      { name: "Four of Pentacles", numeral: "IV", text: "The stable foundation of grounded reality. What you grip so tightly — is it held, or is it holding you?", color: "#2a9d8f" },
+      { name: "Five of Pentacles", numeral: "V", text: "The disruptive challenge within material manifestation. The window glows from inside. You have not tried the door.", color: "#2a9d8f" },
+      { name: "Six of Pentacles", numeral: "VI", text: "The harmonious restoration of grounded reality. Generosity as equilibrium; the tide that raises all vessels.", color: "#2a9d8f" },
+      { name: "Seven of Pentacles", numeral: "VII", text: "The strategic defense of material manifestation. The harvest is not yet ripe. Patience is the final tool.", color: "#2a9d8f" },
+      { name: "Eight of Pentacles", numeral: "VIII", text: "The rapid acceleration of grounded reality. Deliberate repetition — the craft that becomes the master.", color: "#2a9d8f" },
+      { name: "Nine of Pentacles", numeral: "IX", text: "The nearing culmination of material manifestation. Abundance earned in solitude, worn with quiet pride.", color: "#2a9d8f" },
+      { name: "Ten of Pentacles", numeral: "X", text: "The absolute fulfillment of grounded reality. A legacy written not in stone but in the lives it has altered.", color: "#2a9d8f" },
+      { name: "Page of Pentacles", numeral: "Page", text: "The youthful spark of material manifestation. Eyes fixed on the coin as if the future is encoded within it.", color: "#2a9d8f" },
+      { name: "Knight of Pentacles", numeral: "Knight", text: "The dynamic pursuit of grounded reality. Methodical. Relentless. The last one standing when the dust settles.", color: "#2a9d8f" },
+      { name: "Queen of Pentacles", numeral: "Queen", text: "The intuitive mastery of material manifestation. She makes abundance feel effortless; it is not.", color: "#2a9d8f" },
+      { name: "King of Pentacles", numeral: "King", text: "The sovereign command of grounded reality. Wealth as an ecosystem, not a hoard.", color: "#2a9d8f" },
     ];
 
     const drawLabels = { 1: ['Reflection'], 3: ['Past', 'Present', 'Future'] };
@@ -981,7 +1059,7 @@
       msgEl.textContent = '';
       drawnCards = [];
 
-      const shuffled = [...arcana].sort(() => Math.random() - 0.5);
+      const shuffled = cryptoShuffle(arcana);
       const drawn = shuffled.slice(0, count);
       const labels = drawLabels[count] || drawLabels[1];
 
