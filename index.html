@@ -500,11 +500,61 @@
     .footer-text { font-size: 14px; font-style: italic; color: var(--c-dust); }
 
     /* Responsiveness */
-    @media (max-width: 900px) {
-      .servant { flex-direction: column; text-align: center; }
-      nav { padding: 20px; }
-      .nav-menu { display: none; }
-      section { padding: 100px 30px; }
+    /* Tablet landscape & small desktop */
+    @media (max-width: 1024px) {
+      .servant { gap: 60px; }
+      .dom-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+      .servant-veil { padding: 40px 30px; }
+      .veil-runic { letter-spacing: 0.8em; font-size: 9px; }
+    }
+    /* Tablet portrait */
+    @media (max-width: 768px) {
+      .servant { flex-direction: column; text-align: center; gap: 40px; }
+      .servant-veil { padding: 36px 24px; }
+      .veil-corner { width: 28px; height: 28px; border-width: 2px; }
+      .veil-runic { letter-spacing: 0.6em; font-size: 8px; }
+      .dom-grid { grid-template-columns: 1fr; }
+      .approach-content { padding: 0 20px; }
+      .oracle-controls { flex-direction: column; gap: 12px; }
+      .oracle-btn { padding: 12px 24px; font-size: 10px; }
+      .tarot-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .section-title { font-size: clamp(28px, 6vw, 42px); }
+      section { padding: 80px 24px; }
+    }
+    /* Mobile large */
+    @media (max-width: 600px) {
+      .servant { gap: 32px; }
+      .servant-veil { padding: 28px 20px; }
+      .veil-corner { width: 24px; height: 24px; }
+      .veil-runic { letter-spacing: 0.4em; font-size: 7px; }
+      .section-title { font-size: clamp(24px, 7vw, 36px); }
+      .section-num { font-size: 11px; letter-spacing: 0.25em; }
+      .servant-sub { font-size: 12px; letter-spacing: 0.15em; }
+      .servant-title { font-size: clamp(28px, 8vw, 40px); }
+      .tarot-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .tarot-card { padding: 12px 6px; }
+      .tarot-card .numeral { font-size: 16px; }
+      .tarot-card .name { font-size: 10px; }
+      section { padding: 70px 18px; }
+      .dom-card { padding: 30px 20px; }
+      .dom-card h3 { font-size: 18px; }
+      .dom-card p { font-size: 15px; }
+      nav { padding: 14px 18px; }
+    }
+    /* Mobile small */
+    @media (max-width: 480px) {
+      .servant { gap: 24px; }
+      .servant-veil { padding: 24px 16px; }
+      .veil-corner { width: 20px; height: 20px; border-width: 1.5px; }
+      .veil-runic { display: none; }
+      .section-title { font-size: clamp(22px, 8vw, 30px); }
+      .tarot-grid { grid-template-columns: 1fr; gap: 10px; }
+      .tarot-card { padding: 10px; }
+      .dom-card { padding: 24px 16px; }
+      .dom-card h3 { font-size: 16px; }
+      .dom-card p { font-size: 14px; }
+      .oracle-btn { padding: 10px 18px; font-size: 9px; letter-spacing: 0.2em; }
+      section { padding: 60px 14px; }
     }
     
     /* Touch / Reduced Motion */
@@ -515,6 +565,7 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       .veil { display: none; }
+      .parallax-bg { transition: none !important; transform: none !important; will-change: auto; }
     }
   </style>
 </head>
@@ -962,12 +1013,16 @@
     function updateParallax() {
       if (reduceMotion) return;
 
+      // Disable parallax on small screens (avoid zoom/lag)
+      const isSmall = window.innerWidth < 768;
+      const speedMult = isSmall ? 0 : 1;
+
       // Hero section depth parallax
       const rect = heroSection.getBoundingClientRect();
       const scrolled = -rect.top;
       parallaxLayers.forEach(layer => {
         const depth = parseFloat(layer.dataset.depth) || 0;
-        const translate = scrolled * depth;
+        const translate = scrolled * depth * speedMult;
         layer.style.transform = `translate3d(0, ${translate}px, 0)`;
       });
 
@@ -980,7 +1035,7 @@
         // Only apply when section is within viewport vicinity
         if (sRect.bottom < -200 || sRect.top > window.innerHeight + 200) return;
         const sCenter = sRect.top + sRect.height / 2 - window.innerHeight / 2;
-        const offset = sCenter * speed;
+        const offset = sCenter * speed * speedMult;
         bg.style.transform = `translate3d(0, ${offset}px, 0)`;
       });
 
