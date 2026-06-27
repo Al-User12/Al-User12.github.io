@@ -320,15 +320,24 @@
 
     /* Dominion */
     .dominion { background: transparent; position: relative; z-index: 1; }
+    .dominion::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--c-gold), transparent);
+    opacity: 0.2;
+    }
+    .dominion::after {
+    content: '';
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(74,33,133,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    }
     .section-head { text-align: center; margin-bottom: 80px; position: relative; z-index: 2; }
     .section-num { font-family: var(--font-heading); font-size: 12px; letter-spacing: 0.3em; color: var(--c-gold-dark); margin-bottom: 20px; }
     .section-title { font-family: var(--font-display); font-size: clamp(32px, 4vw, 56px); color: var(--c-gold-bright); }
     
     .dom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-    .dom-card { border: 1px solid rgba(198,161,82,0.15); padding: 50px 40px; background: rgba(7,10,18,0.3); backdrop-filter: blur(8px); transition: transform 0.5s, border-color 0.5s; position: relative; overflow: hidden; }
-    .dom-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--c-gold), transparent); transform: translateX(-100%); transition: transform 0.8s; }
-    .dom-card:hover { transform: translateY(-10px); border-color: rgba(198,161,82,0.3); }
-    .dom-card:hover::before { transform: translateX(100%); }
     .dom-icon { width: 40px; height: 40px; margin-bottom: 30px; fill: none; stroke: var(--c-gold); stroke-width: 1; }
     .dom-card h3 { font-family: var(--font-heading); font-size: 22px; color: var(--c-gold); margin-bottom: 16px; letter-spacing: 0.1em; }
     .dom-card p { font-size: 18px; color: var(--c-dust); }
@@ -342,6 +351,15 @@
       filter: brightness(0.35) saturate(1.1) contrast(1.1);
       pointer-events: none;
     }
+    .approach::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        linear-gradient(0deg, rgba(3,4,7,0.8) 0%, transparent 15%, transparent 85%, rgba(3,4,7,0.8) 100%),
+        repeating-linear-gradient(90deg, rgba(198,161,82,0.02) 0px, transparent 1px, transparent 80px),
+        repeating-linear-gradient(0deg, rgba(74,33,133,0.02) 0px, transparent 1px, transparent 80px);
+      pointer-events: none;
+    }
     .approach-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; text-align: center; }
     .poem-block { font-size: 24px; font-style: italic; color: var(--c-silver); margin-bottom: 40px; }
     .poem-block strong { color: var(--c-gold-bright); font-weight: normal; }
@@ -352,6 +370,63 @@
     .servant-image::after { content: ''; position: absolute; inset: -20px; border: 1px dashed rgba(74,33,133,0.3); border-radius: 50%; animation: spin-slow 30s linear infinite; }
     .servant-image svg { width: 100%; max-width: 400px; filter: drop-shadow(0 0 40px rgba(74,33,133,0.3)); }
     .servant-text { flex: 1; z-index: 2; }
+
+    /* Servant Veil — Dark Transparent Card */
+    .servant-veil {
+      position: relative;
+      background: linear-gradient(135deg, rgba(10,8,20,0.65) 0%, rgba(20,12,40,0.55) 50%, rgba(10,8,20,0.65) 100%);
+      backdrop-filter: blur(16px) saturate(1.3);
+      -webkit-backdrop-filter: blur(16px) saturate(1.3);
+      border: 1px solid rgba(74,33,133,0.3);
+      border-radius: 4px;
+      padding: 48px 44px;
+      box-shadow:
+        0 0 60px rgba(74,33,133,0.15) inset,
+        0 0 1px rgba(198,161,82,0.4),
+        0 20px 60px rgba(0,0,0,0.5);
+    }
+    .servant-veil::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(74,33,133,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(198,161,82,0.06) 0%, transparent 50%);
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    .servant-veil::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(198,161,82,0.5) 30%, rgba(74,33,133,0.5) 70%, transparent 100%);
+    }
+
+    /* Veil corner ornaments */
+    .veil-corner {
+      position: absolute; width: 24px; height: 24px;
+      border-color: rgba(198,161,82,0.35);
+      border-style: solid;
+      pointer-events: none;
+    }
+    .veil-tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+    .veil-tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
+    .veil-bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
+    .veil-br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+    /* Veil runic borders */
+    .veil-runic {
+      position: absolute;
+      left: 36px; right: 36px;
+      font-family: var(--font-heading);
+      font-size: 8px;
+      letter-spacing: 0.6em;
+      color: rgba(74,33,133,0.3);
+      pointer-events: none;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .veil-runic.top { top: 12px; }
+    .veil-runic.bottom { bottom: 12px; letter-spacing: 0.4em; }
+
     .servant-title { font-family: var(--font-display); font-size: 48px; color: var(--c-gold-bright); line-height: 1; margin-bottom: 10px; }
     .servant-sub { font-family: var(--font-heading); font-size: 12px; letter-spacing: 0.3em; color: var(--c-violet); margin-bottom: 40px; text-transform: uppercase; }
     .servant-prose { font-size: 20px; font-style: italic; color: var(--c-silver); margin-bottom: 24px; }
@@ -361,7 +436,39 @@
 
     /* Oracle Tarot */
     .oracle { background: transparent; text-align: center; position: relative; z-index: 1; }
+    .oracle::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(74,33,133,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(198,161,82,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .oracle::after {
+      content: '✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦';
+      position: absolute; top: 20px; left: 0; right: 0;
+      font-size: 10px; letter-spacing: 0.5em;
+      color: rgba(198,161,82,0.12);
+      pointer-events: none;
+      z-index: 0;
+    }
     .oracle-controls { position: relative; z-index: 2; }
+
+    /* Parallax layers */
+    .parallax-bg {
+      will-change: transform;
+      transition: transform 0.05s linear;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .parallax-bg { transition: none !important; transform: none !important; will-change: auto; }
+    }
+
+    /* Dom card enhancements */
+    .dom-card { border: 1px solid rgba(198,161,82,0.15); padding: 50px 40px; background: rgba(7,10,18,0.3); backdrop-filter: blur(8px); transition: transform 0.5s, border-color 0.5s, box-shadow 0.5s; position: relative; overflow: hidden; }
+    .dom-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--c-gold), transparent); transform: translateX(-100%); transition: transform 0.8s; }
+    .dom-card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 60px; background: radial-gradient(circle at 100% 100%, rgba(74,33,133,0.15) 0%, transparent 70%); pointer-events: none; }
+    .dom-card:hover { transform: translateY(-10px); border-color: rgba(198,161,82,0.3); box-shadow: 0 20px 60px rgba(74,33,133,0.1), 0 0 0 1px rgba(198,161,82,0.08); }
+    .dom-card:hover::before { transform: translateX(100%); }
     .oracle-btn {
       font-family: var(--font-heading); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
       padding: 14px 32px; margin: 0 8px; background: transparent; color: var(--c-gold);
@@ -491,7 +598,7 @@
 
   <!-- Section: Approach (Conway's Canvas) -->
   <section class="approach" id="approach">
-    <canvas id="golCanvas"></canvas>
+    <canvas id="golCanvas" class="parallax-bg" data-speed="0.2"></canvas>
     <div class="approach-content reveal">
       <div class="section-num">II. DETERMINISM</div>
       <h2 class="section-title">The Game of Life</h2>
@@ -504,8 +611,8 @@
   </section>
 
   <!-- Section: Servant -->
-  <section id="servant" style="position:relative; overflow:hidden;">
-    <div class="servant-bg-img" aria-hidden="true" style="opacity: 1; filter: brightness(0.5) saturate(0.8) hue-rotate(15deg); mix-blend-mode: normal;"></div>
+  <section id="servant" style="position:relative; overflow:hidden; padding-top:100px; padding-bottom:100px;">
+    <div class="servant-bg-img parallax-bg" data-speed="0.15" aria-hidden="true" style="opacity: 1; filter: brightness(0.5) saturate(0.8) hue-rotate(15deg); mix-blend-mode: normal;"></div>
     <div style="position:absolute; right: -5%; bottom: -10%; opacity: 0.15; pointer-events:none; z-index: 1;">
       <img src="assets/sword-art-crest.png" alt="Sword Crest" style="width: 800px; transform: rotate(-15deg);">
     </div>
@@ -559,24 +666,32 @@
         <div class="arcana-label">VIOLET-07 · ARCANA · 剣聖</div>
       </div>
       <div class="servant-text">
-        <div class="section-num">III. THE SWORD &amp; THE SOUL</div>
-        <h2 class="servant-title">VIOLET-07</h2>
-        <div class="servant-sub">Magic Swordmaster · Arcana Bound · 契約の剣</div>
-        <p class="servant-prose">"The seal is drawn in blood. The blade sings in the space between heartbeats."</p>
-        <p class="servant-prose">"I am the arcane edge that parts fate from fiction. <em>Where others see impossibility — I slash through it.</em>"</p>
-        <div class="arcana-stats">
-          <div class="stat-row"><span class="stat-name">Arcana Class</span><span class="stat-val">∞ Unlimited</span></div>
-          <div class="stat-row"><span class="stat-name">Contract</span><span class="stat-val">Blood-Sealed · The Monarch</span></div>
-          <div class="stat-row"><span class="stat-name">Blade Form</span><span class="stat-val">Soul-Blade Duality</span></div>
-        </div>
-        <p style="color: var(--c-dust); font-size: 16px; margin-top: 20px;">Hover the sigil — witness the slash.</p>
-      </div>
+              <div class="servant-veil">
+                <div class="veil-corner veil-tl"></div>
+                <div class="veil-corner veil-tr"></div>
+                <div class="veil-corner veil-bl"></div>
+                <div class="veil-corner veil-br"></div>
+                <div class="veil-runic top">ᚠ ᚦ ᚬ ᚱ ᚴ ᚼ ᚾ ᛁ ᛃ ᛇ ᛈ ᛉ ᛊ ᛏ ᛒ ᛖ ᛗ ᛚ ᛜ ᛞ ᛟ</div>
+                <div class="veil-runic bottom">Æ Ð Þ ƿ Ƿ Ȝ Ƀ ʒ Æ Ð Þ ƿ Ƿ Ȝ Ƀ ʒ</div>
+                <div class="section-num">III. THE SWORD &amp; THE SOUL</div>
+                <h2 class="servant-title">VIOLET-07</h2>
+                <div class="servant-sub">Magic Swordmaster · Arcana Bound · 契約の剣</div>
+                <p class="servant-prose">"The seal is drawn in blood. The blade sings in the space between heartbeats."</p>
+                <p class="servant-prose">"I am the arcane edge that parts fate from fiction. <em>Where others see impossibility — I slash through it.</em>"</p>
+                <div class="arcana-stats">
+                  <div class="stat-row"><span class="stat-name">Arcana Class</span><span class="stat-val">∞ Unlimited</span></div>
+                  <div class="stat-row"><span class="stat-name">Contract</span><span class="stat-val">Blood-Sealed · The Monarch</span></div>
+                  <div class="stat-row"><span class="stat-name">Blade Form</span><span class="stat-val">Soul-Blade Duality</span></div>
+                </div>
+                <p style="color: var(--c-dust); font-size: 16px; margin-top: 20px;">Hover the sigil — witness the slash.</p>
+              </div>
+            </div>
     </div>
   </section>
 
   <!-- Section: Tarot Oracle -->
   <section class="oracle" id="oracle" style="position:relative; overflow:hidden;">
-    <div class="oracle-bg-img" aria-hidden="true" style="opacity: 1; filter: brightness(0.35) hue-rotate(10deg) saturate(1.2);"></div>
+    <div class="oracle-bg-img parallax-bg" data-speed="0.2" aria-hidden="true" style="opacity: 1; filter: brightness(0.35) hue-rotate(10deg) saturate(1.2);"></div>
     <div class="math-pattern-bg" aria-hidden="true" style="opacity: 0.08;"></div>
     <div class="reveal">
       <div class="section-num">IV. THE FATE WE FORGE</div>
@@ -834,11 +949,20 @@
     document.getElementById('drawOne').addEventListener('click', () => shuffleAndDraw(1));
     document.getElementById('drawThree').addEventListener('click', () => shuffleAndDraw(3));
 
-    // --- Parallax (Hero Layers) ---
+    // --- Smooth Multi-Section Parallax (rAF + IntersectionObserver, respects prefers-reduced-motion) ---
     const heroSection = document.getElementById('home');
     const parallaxLayers = heroSection.querySelectorAll('.parallax-layer');
-    
-    function handleParallax() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Collect all parallax-bg elements (servant, oracle, etc.)
+    const parallaxBgs = document.querySelectorAll('.parallax-bg[data-speed]');
+
+    let ticking = false;
+
+    function updateParallax() {
+      if (reduceMotion) return;
+
+      // Hero section depth parallax
       const rect = heroSection.getBoundingClientRect();
       const scrolled = -rect.top;
       parallaxLayers.forEach(layer => {
@@ -846,14 +970,35 @@
         const translate = scrolled * depth;
         layer.style.transform = `translate3d(0, ${translate}px, 0)`;
       });
+
+      // Cross-section bg parallax — smooth offset relative to section midpoint
+      parallaxBgs.forEach(bg => {
+        const speed = parseFloat(bg.dataset.speed) || 0.15;
+        const section = bg.closest('section');
+        if (!section) return;
+        const sRect = section.getBoundingClientRect();
+        // Only apply when section is within viewport vicinity
+        if (sRect.bottom < -200 || sRect.top > window.innerHeight + 200) return;
+        const sCenter = sRect.top + sRect.height / 2 - window.innerHeight / 2;
+        const offset = sCenter * speed;
+        bg.style.transform = `translate3d(0, ${offset}px, 0)`;
+      });
+
+      ticking = false;
     }
-    window.addEventListener('scroll', handleParallax, { passive: true });
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
 
     // Gyroscope / device-tilt parallax (mobile)
-    if (window.DeviceOrientationEvent) {
+    if (window.DeviceOrientationEvent && !reduceMotion) {
       window.addEventListener('deviceorientation', (e) => {
-        const beta = (e.beta || 0) / 90;   // front-back tilt
-        const gamma = (e.gamma || 0) / 90;  // left-right tilt
+        const beta = (e.beta || 0) / 90;
+        const gamma = (e.gamma || 0) / 90;
         parallaxLayers.forEach(layer => {
           const depth = parseFloat(layer.dataset.depth) || 0;
           const tx = gamma * depth * 50;
